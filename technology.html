@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Technology - ZJUDancer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+
+    <!-- 全局导航栏 (Technology 高亮) -->
+    <nav id="top-nav">
+        <div class="nav-logo">ZJUDancer</div>
+        <ul class="nav-links">
+            <li><a href="index.html" >Home</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="publications.html">Publications</a></li>
+		    <li><a href="technology.html" class="active">Technology</a></li> 
+		    <li><a href="history.html">History</a></li> 
+            <li><a href="media.html">Media</a></li>
+        </ul>
+    </nav>
+
+    <!-- 子页面页头 -->
+    <header class="subpage-header">
+        <h1>技术路线与架构</h1>
+        <p>System Architecture & Core Technologies</p>
+    </header>
+
+    <!-- 技术架构内容区 -->
+    <section class="main style1">
+        <div class="container">
+            
+            <!-- 架构总览图预留位 -->
+            <header class="major"><h2>全栈系统架构</h2></header>
+            <p>ZJUDancer 采用高度模块化的软硬件协同设计。底层基于实时操作系统保证控制频率，上层依托高性能计算单元运行复杂的深度学习与多智能体决策算法。</p>
+            <div class="row gtr-150">
+                <div class="col-12">
+                    <!-- 这里强烈建议放一张你们自己绘制的系统架构框图 (Block Diagram) -->
+                    <span class="image fit"><img src="images/pic01.jpg" alt="系统架构总览图" style="border-radius: 8px; border: 1px solid #eaeaea;" /></span>
+                </div>
+            </div>
+
+            <hr style="margin: 60px 0;" />
+
+            <!-- 技术模块卡片区 -->
+            <header class="major"><h2>核心技术栈</h2></header>
+            <div class="row gtr-150">
+                
+                <!-- 模块 1：感知与视觉 -->
+                <div class="col-6 col-12-medium">
+                    <div class="tech-card">
+                        <div class="tech-icon">👁️</div>
+                        <h3>感知与视觉 (Perception & Vision)</h3>
+                        <p>在计算资源受限的机载平台上，实现高帧率的实时环境感知。</p>
+                        <ul>
+                            <li><strong>目标检测：</strong> 基于轻量级 YOLO 网络的足球与机器人识别。</li>
+                            <li><strong>特征提取：</strong> 传统 CV 结合深度学习的场地线与球门检测。</li>
+                            <li><strong>自我定位：</strong> 基于粒子滤波 (Particle Filter) 的高精度全局定位。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 模块 2：决策与协作 -->
+                <div class="col-6 col-12-medium">
+                    <div class="tech-card">
+                        <div class="tech-icon">🧠</div>
+                        <h3>决策与协作 (Strategy & Teamplay)</h3>
+                        <p>赋予机器人自主思考与团队配合的大脑。</p>
+                        <ul>
+                            <li><strong>行为树架构：</strong> 采用 Behavior Trees 实现复杂逻辑的解耦与状态机管理。</li>
+                            <li><strong>多智能体通信：</strong> 基于 UDP 广播的无中心化局域网状态共享。</li>
+                            <li><strong>动态角色分配：</strong> 根据场上局势实时切换主攻、助攻与防守角色。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 模块 3：运动与控制 -->
+                <div class="col-6 col-12-medium">
+                    <div class="tech-card">
+                        <div class="tech-icon">⚙️</div>
+                        <h3>运动与控制 (Motion & Control)</h3>
+                        <p>确保机器人在复杂地形与身体对抗中的动态平衡。</p>
+                        <ul>
+                            <li><strong>步态规划：</strong> 基于 3D 线性倒立摆 (LIPM) 与 ZMP 理论的全向步行引擎。</li>
+                            <li><strong>姿态闭环：</strong> 融合 IMU 数据的全身动量控制与抗干扰反馈。</li>
+                            <li><strong>运动学解算：</strong> 高效的正逆运动学 (FK/IK) 实时求解。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 模块 4：硬件平台 -->
+                <div class="col-6 col-12-medium">
+                    <div class="tech-card">
+                        <div class="tech-icon">🤖</div>
+                        <h3>硬件平台 (Hardware Platform)</h3>
+                        <p>自主研发的高可靠性机电一体化系统。</p>
+                        <ul>
+                            <li><strong>计算核心：</strong> 搭载 Intel NUC / 高性能 ARM 核心板。</li>
+                            <li><strong>执行机构：</strong> 定制化大扭矩伺服舵机与高强度碳纤维/铝合金骨架。</li>
+                            <li><strong>传感系统：</strong> 高帧率全局快门相机与高精度六轴 IMU。</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 引入脚本 -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
