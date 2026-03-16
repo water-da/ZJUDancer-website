@@ -1,0 +1,102 @@
+/* ai-nest - AI Agency Startup & Technology HTML Template
+
+Template Name: ai-nest
+Version: 1.0.0
+License: copyright commercial
+
+/************ TABLE OF CONTENTS ***************
+1. Fonts
+2. Reset
+3. Global Settings
+4. Main Header / TWO / Three / Four
+5. Sticky Header 
+6. Mobile Menu
+7. Section Title
+8. Page Title
+9. Main Slider
+10. Banner Section / Two / Three / Four
+11. Features Section / Two / Three
+12. About Section / Two / Three / Four
+13. Services Section / Two / Three / Four
+15. Call To Action / Two / Three / Four
+18. brand area / Two / Three
+19. workflow section / Two / Three
+20. Testimonial Section / Two / Three / Four
+21. Why Choose Us / Two / Three
+22. Pricing Section
+23. Contact Sectiom / Two / Three / Four
+24. binifits marquee / Two / Three
+25. integration section / Two 
+26. call to action / Two / Three
+27. dashbord section / Two 
+28. process section / Two 
+29. project marquee / Two 
+30. accordion section / Two / Three
+31. blog section / Two / Three / Four
+32. service section / Two / Three 
+33. portfolio section / Two 
+34. Contact Sectiom / Two / Three / Four
+35. Main Footer
+**********************************************/
+
+@import "scss-bootstrap/functions";
+@import "scss-bootstrap/variables";
+@import "scss-bootstrap/mixins";
+@import "common/root.scss";
+@import "common/mixing.scss";
+@import "common/loader.scss";
+@import "common/boxed-layout.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@import url('animate.css');
+@import url('swiper.min.css');
+@import url('magnific.css');
+@import url('linear.css');
+@import url('fontawesome-free.css');
+@import url('fontawesome.css');
+@import url('tm-bs-mp.css');
+@import url('tm-utility-classes.css');
+@import url('odometer-theme-default.css');
+@import url('cusor-text.css');
+@import url('nice-select.css');
+@import url('meanmenu.min.css');
+
+
+
+// import SCSS components one by one
+@import "reset.scss";
+@import "header.scss";
+@import "offcanvas.scss";
+@import "section-title.scss";
+@import "banner.scss";
+@import "button.scss";
+@import "brand.scss";
+@import "workflow.scss";
+@import "binifits-marquee.scss";
+@import "feature.scss";
+@import "integration.scss";
+@import "about.scss";
+@import "pricing-plan.scss";
+@import "testimonial.scss";
+@import "call-to-action.scss";
+@import "footer.scss";
+@import "process.scss";
+@import "accordion.scss";
+@import "blog.scss";
+@import "service.scss";
+@import "why-choose.scss";
+@import "chatbot.scss";
+
+
+
+//inner page
+@import "inner/team.scss";
+@import "inner/blog-details.scss";
+@import "inner/contact.scss";
+@import "inner/service-inner.scss";
+@import "inner/team-details.scss";
+@import "inner/service-details.scss";
+
+
+

@@ -1,0 +1,98 @@
+.sidebar-area{
+    background-color: var(--theme-color1);
+    .offcanvas-header{
+        .btn-close{
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-radius: 50%;
+            -webkit-transition:transition(all 300ms ease);
+            @include transition(all 300ms ease);
+            font-size: 22px;
+            color: var(--theme-color-light);
+            background-color:transparent;
+            opacity: 1;
+            background-image: none;
+            transition:transition(all 300ms ease);
+            border: 1px solid var(--theme-color-white);
+            &:hover{
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+        }
+    }
+    .sidebar__body{
+        margin-top: 30px;
+        .text-white{
+            color: var(--theme-color-white);
+            margin-bottom: 20px;
+        }
+        .sidebar__text{
+            color: var(--theme-color-white);
+        }
+        .sidebar__contact-info{
+            li{
+                list-style: none;
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+                i{
+                    display: inline-block;
+                    margin-right: 10px;
+                    color:var(--theme-color-white);
+                }
+                a{
+                    display: inline-block;
+                    color: var(--theme-color-white);
+                }
+            }
+        }
+        .sidebar__btns{
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 12px;
+            a{
+                display: inline-block;
+                padding: 6px 16px;
+                border-radius: 8px;
+                color: var(--theme-color-white);
+                border: 1px solid var(--theme-color-white);
+                &:hover{
+                    background-color: var(--theme-color2);
+                }
+            }
+        }
+        .sidebar__socials{
+            ul{
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 12px;
+            li{
+                width: 40px;
+                height: 40px;
+                line-height: 35px;
+                text-align: center;
+                border-radius: 50%;
+                @include transition(all 300ms ease);
+                border: 1px solid var(--theme-color-white);
+                a{
+                    display: inline-block;
+                    @include transition(all 300ms ease);
+                }
+                &:hover{
+                    background-color: var(--theme-color2);
+                }
+            }
+            }
+        }
+    }
+}

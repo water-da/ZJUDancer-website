@@ -1,0 +1,114 @@
+//Root 
+
+:root {
+
+  --theme-color-white: #ffffff;
+  --theme-color-white-rgb: 255, 255, 255;
+  --theme-color-light: #f8f5f0;
+  --theme-color-gray: #f6f6f6;
+
+  --theme-color-black: #000000;
+  --theme-color-black-rgb: 0, 0, 0;
+
+  //theme color
+  --theme-primary:#6766FF;
+  --theme-color1:  #080220;
+  --theme-color2:#07011F;
+  --theme-color3:#0F0927;
+  --theme-color4:#FF9F31;
+  --theme-color5:#1F1A36;
+  --theme-color6:#0DB561;
+
+
+
+
+
+  // theme bg color
+  --theme-bg-color1:#080220;
+  --theme-bg-color2:#120C2A;
+  --theme-bg-color3:#140E2C;
+
+
+  //bg theme color
+  --bg-theme-color1: var(--theme-color1);
+  --bg-theme-color2: var(--theme-color2);
+  --bg-theme-color3: var(--theme-color3);
+  --border-theme-color1: var(--theme-color1);
+  --border-theme-color2: var(--theme-color2);
+  --border-theme-color3: var(--theme-color3);
+  
+  --text-color-bg-theme-color1: #fff;
+  --text-color-bg-theme-color2: #0f0f0f;
+  --text-color-bg-theme-color3: #fff;
+
+  // gradient
+  --gradient-1:linear-gradient(91.06deg, #6766FF 6.82%, rgba(103, 102, 255, 0.2) 37.09%, rgba(103, 102, 255, 0.2) 67.36%, #6766FF 96.43%);
+
+
+
+
+
+
+
+  //text heading color
+  --text-color:         #ffffffb3;
+  --heading-color:     #0C2318;
+  --link-color:         #6766FF;
+  --link-hover-color:   #6766FF;
+
+  //font family
+  --text-font:"Nunito Sans", sans-serif;
+  --title-font:"Rajdhani", sans-serif;
+
+
+  //body
+  --body-font-size:   16px;
+  --body-line-height: 28px;
+  --body-font-weight: 400;
+
+  //heading font size + weight
+  --line-height-heading-h1: 1em;
+  --line-height-heading: 1.2em;
+  --line-height-heading-small: 1.4em;
+
+  --h1-font-size: 60.8px;
+  --h2-font-size: 48px;
+  --h3-font-size: 31.2px;
+  --h4-font-size: 23.2px;
+  --h5-font-size: 18px;
+  --h6-font-size: 14px;
+
+  --h1-font-weight: 700;
+  --h2-font-weight: 700;
+  --h3-font-weight: 700;
+  --h4-font-weight: 700;
+  --h5-font-weight: 700;
+  --h6-font-weight: 700;
+
+  //section sub title
+  --sec-title-subtitle-color: var(--theme-color2);
+  --sec-title-subtitle-font-size: 13px;
+  --sec-title-subtitle-font-family: var(--text-font);
+  --sec-title-subtitle-font-weight: 700;
+  --sec-title-subtitle-line-height: 1.2em;
+
+  //section title
+  --sec-title-color:                 var(--heading-color);
+  --sec-title-font-size:             50px;
+  --sec-title-font-family:           var(--title-font);
+  --sec-title-font-weight:           var(--h2-font-weight);
+
+  //news details page
+  --theme-light-background: #f8f6f1;
+  --theme-light-background-text-color: var(--heading-color);
+  --theme-black:        #222429;
+
+
+  //container
+  --container-width: 1350px;
+  --main-container-width:1320px;
+  --small-container-width: 1000px;
+  --large-container-width: 1550px;
+  --container-pt:    120px;
+  --container-pb:    120px;
+}

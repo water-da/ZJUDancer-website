@@ -1,0 +1,156 @@
+// workflow-section-one
+
+.workflow-section-one{
+    background: var(--theme-bg-color1);
+    padding: 110px 0 100px;
+    .about-counter{
+        background: var(--theme-color1);
+        border-radius: 40px;
+        padding: 35px 40px 30px;
+        position: relative;
+        transition: 0.5s;
+        margin-bottom: 20px;
+        &::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 40px;
+            border: 1.5px solid transparent;
+            background: linear-gradient(91.06deg, #6766FF 6.82%, rgba(103, 102, 255, 0.2) 37.09%, rgba(103, 102, 255, 0.2) 67.36%, #6766FF 96.43%) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+        }
+        .counter-content{
+            display: flex;
+            justify-content: space-between;
+            h3{
+                display: inline-block;
+                color: var(--theme-color-white);
+                font-weight: 600;
+                font-size: 66px;
+                margin: 0;
+            }
+            span{
+                display: inline-block;
+                color: var(--theme-color-white);
+                font-weight: 600;
+                font-size: 60px;
+            }
+        }
+        .counter-icon{
+            width: 46px;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            border: 1px solid var(--theme-primary);
+            border-radius: 50%;
+            margin-top: 5px;
+            position: relative;
+            z-index: 1;
+            &::before{
+                position: absolute;
+                z-index: -1;
+                content: "";
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                transform: scale(0);
+                border-radius: 50%;
+                background-color: var(--theme-primary);
+                transition: all 300ms ease;
+            }
+        }
+        .counter-desc{
+            p{
+                color:rgb(255, 255, 255,0.70);
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 26px;
+                padding-top: 46px;
+            }
+        }
+        &:hover .counter-icon::before{
+            transform: scale(1);
+        }
+        &:hover .counter-icon{
+            border: 1px solid transparent;
+        }
+        &:hover .counter-icon img{
+            filter: brightness(0) invert(1);
+        } 
+    }
+}
+
+// workflow-section-two
+
+.workflow-section-two{
+    padding: 60px 0 100px;
+    background: var(--theme-bg-color1);
+    .single-workflow-box{
+        background: linear-gradient(180deg, #0B0523 0%, #1C1634 100%);
+        padding: 20px 20px 20px;
+        border-radius: 20px;
+        position: relative;
+        border: 1px solid rgb(92 91 229 / 30%);
+        position: relative;
+        @include media-breakpoint-only(lg){
+            margin-bottom: 20px;
+        }
+        @include media-breakpoint-only(md){
+            margin-bottom: 20px;
+        }
+        @include media-breakpoint-only(sm){
+            margin-bottom: 20px;
+        }
+        .workflow-thumb{
+            figure{
+                width: 382px;
+                height: 265px;
+                    @include media-breakpoint-only(xl){
+                        width: 350px; 
+                    }
+                    @include media-breakpoint-only(lg){
+                        width:100%; 
+                    }
+                    @include media-breakpoint-only(md){
+                        width:100%; 
+                    }
+                    @include media-breakpoint-only(sm){
+                        width:100%; 
+                    }
+                img{
+                    @include media-breakpoint-only(lg){
+                        width:100%; 
+                    }
+                    @include media-breakpoint-only(md){
+                        width:100%; 
+                    }
+                    @include media-breakpoint-only(sm){
+                        width:100%; 
+                    }
+                }
+            }
+        }
+        .workflow-content{
+            padding: 12px 20px 0;
+            h3{
+                color: var(--theme-color-white);
+                font-weight: 600;
+                font-size: 26px;
+                line-height: 34px;
+                margin: 0;
+            }
+            p{
+                color: rgb(255, 255, 255,0.70);
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 26px;
+            }
+        }
+    }
+}

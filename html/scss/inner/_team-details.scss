@@ -1,0 +1,264 @@
+// team details page title
+.team-details-page-title {
+    background: var(--theme-bg-color1);
+    padding: 202px 0px 100px;
+    position: relative;
+    margin-top: -102px;
+    .title-content{
+        margin-bottom: 52px;
+        text-align: center;
+        .page-sub-title{
+            display: inline-block;
+            color: var(--theme-color-white);
+            font-family:var(--title-font);
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 30px;
+            border-radius: 40px;
+            position: relative;
+            background:#FFFFFF0D;
+            margin: 0;
+            &::before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 40px;
+                border: 1.5px solid transparent;
+                background: linear-gradient(91.06deg, #6766FF 6.82%, rgba(103, 102, 255, 0.2) 37.09%, rgba(103, 102, 255, 0.2) 67.36%, #6766FF 96.43%) border-box;
+                -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+            }
+        }
+        .page-title{
+            color: var(--theme-color-white);
+            font-weight: 700;
+            font-size: 50px;
+            line-height: 56px;
+            margin: 14px 0 5px;
+        }
+        .page-desc{
+            color: rgb(255 255 255 / 70%);
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 28px;
+            width: 40%;
+            margin:0px auto;
+            @include for-xxl{
+                width: 100%; 
+            }
+        }
+    }
+    .team-details-area{
+        .team-thumb{
+            figure{
+                margin: 0;
+                border-radius: 10px;
+            }
+        }
+        .team-details-right{
+            .team-details-content{
+                .team-member-title{
+                    h4{
+                        color: var(--theme-color-white);
+                        font-size: 36px;
+                        margin: 0;
+                    }
+                    p{
+                        margin-bottom: 45px;
+                    }
+                }
+                >p{
+                    font-size: 18px;
+                    color: rgb(255 255 255 / 60%);
+                }
+            }
+            .contact-info-box{
+                background:var(--theme-primary);
+                padding: 29px 25px 27px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                transition: 0.5s;
+                position: relative;
+                z-index: 1;
+                overflow: hidden;
+                gap: 11px;
+                @include media-breakpoint-only(xl) {
+                    padding: 29px 10px 27px;
+                }
+                @include media-breakpoint-only(lg) {
+                    margin-bottom: 20px;
+                }
+                @include media-breakpoint-only(md) {
+                    margin-bottom: 20px;
+                }
+                @include media-breakpoint-only(sm) {
+                    margin-bottom: 20px;
+                }
+                .contact-info-icon{
+                    i{
+                        display: inline-block;
+                        color:var(--theme-color-white);
+                        border: 2px solid var(--theme-color-white);
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 56px;
+                        font-size: 22px;
+                        transition: 0.5s;
+                    }
+                }
+                .contact-info-content{
+                    h4{
+                        color: var(--theme-color-white);
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin: 0;
+                        padding: 0 0 11px 0;
+                        transition: 0.5s;
+                    }
+                    p{
+                        font-size: 22px;
+                        color:var(--theme-color-white);
+                        font-weight: 600;
+                        margin: 0;
+                        padding: 0;
+                        transition: 0.5s;
+                        @include media-breakpoint-only(xl){
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+            .team-details-social-icon{
+                ul{
+                    li{
+                        font-size: 22px;
+                        color:var(--theme-color-white);
+                        font-weight: 600;
+                        margin-top: 49px;
+                        display: inline-block;
+                        a{
+                            i{
+                                background:var(--theme-primary);
+                                width: 38px;
+                                height: 38px;
+                                border-radius: 50%;
+                                text-align: center;
+                                line-height: 38px;
+                                color:var(--theme-color-white);
+                                font-size: 14px;
+                                margin-left: 7px;
+                                transition: 0.5s;
+                                &:hover{
+                                    background: var(--theme-color-white);
+                                    color: var(--theme-color2);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .team-details-location-box{
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-top: 46px;
+                .contact-info-icon{
+                    i{
+                        display: inline-block;
+                        color:var(--theme-primary);
+                        border: 2px solid var(--theme-primary);
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        text-align: center;
+                        line-height: 56px;
+                        font-size: 22px;
+                        transition: 0.5s;
+                    }
+                }
+                .contact-info-content{
+                    h4{
+                        color: var(--theme-color-white);
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin: 0;
+                        padding: 0 0 11px 0;
+                        transition: 0.5s;
+                    }
+                    p{
+                        font-size: 17px;
+                        color: rgb(255 255 255 / 60%);
+                        font-weight: 600;
+                        margin: 0;
+                        padding: 0;
+                        transition: 0.5s;
+                    }
+                }
+            }
+        }
+        .team-details-skills{
+            margin-top: 90px;
+            h4{
+                font-size: 36px;
+                margin: 0 0 35px;
+                color: var(--theme-color-white);
+            }
+            .wrapper{
+                .skills{
+                    .skill-item{
+                        position: relative;
+                        .donation-skill-title{
+                            h5{
+                                font-size: 18px;
+                                font-weight: 500;
+                                color: var(--theme-color-white);
+                                margin-bottom: 10px;
+                            }
+                        }
+                        .skill-bar{
+                            position: relative;
+                            width: 85%;
+                            height: 45px;
+                            border-radius: 5px;
+                            .bar-inner{
+                                position: relative;
+                                width: 100%;
+                                height: 7px;
+                                background:var(--theme-color-white);
+                                border-radius: 20px;
+                                .bar{
+                                    position: absolute;
+                                    left: 0px;
+                                    top: 0px;
+                                    height: 7px;
+                                    width: 0px;
+                                    -webkit-transition: all 3000ms ease;
+                                    transition: all 3000ms ease;
+                                    border-radius: 20px;
+                                    background-color: var(--theme-primary);
+                                    .skill-percentage{
+                                        position: absolute;
+                                        right: 0;
+                                        bottom: 100%;
+                                        font-size: 16px;
+                                        font-weight: 400;
+                                        color: var(--theme-primary);
+                                        line-height: 25px;
+                                        margin-bottom: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

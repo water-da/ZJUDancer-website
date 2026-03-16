@@ -1,0 +1,278 @@
+// team-section-one
+
+.team-section-one{
+    background: var(--theme-bg-color1);
+    padding: 120px 0 130px;
+    position: relative;
+    z-index: 1;
+    .team-top-effiect{
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .single-team-box{
+        background: var(--theme-color3);
+        border: 1px solid #FFFFFF33;
+        border-top-left-radius: 310px;
+        border-top-right-radius: 310px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        text-align: center;
+        padding:40px 20px 40px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        @include for-xxl{
+            margin-bottom: 20px;
+        }
+        .team-thumb{
+            margin-bottom: 32px;
+            figure{
+                border: 15px solid rgb(255 255 255 / 10%);
+                border-radius: 50%;
+                margin: 0;
+                img{}
+            }
+        }
+        .team-content-box{
+            position: relative;
+            z-index: 1;
+            .team-content{
+                .team-title{
+                    a{
+                        display: inline-block;
+                        color: var(--theme-color-white);
+                        font-family:var(--title-font);
+                        font-weight: 700;
+                        font-size: 34px;
+                        transition: 0.5s;
+                        &:hover{
+                            color: var(--theme-primary);
+                        }
+                    }
+                }
+                .team-desi{
+                    display: inline-block;
+                    color: var(--theme-color-white);
+                    font-family:var(--text-font);
+                    font-weight: 400;
+                    font-size: 15px;
+                    border: 1px solid rgb(255 255 255 / 10%);
+                    background:rgb(255 255 255 / 10%);
+                    border-radius: 40px;
+                    padding: 5px 22px;
+                    margin-bottom: 28px;
+                }
+            }
+            .team-social-icon{
+                ul{
+                    li{
+                        display: inline-block;
+                        margin: 0 3px;
+                        a{
+                            display: inline-block;
+                            width: 36px;
+                            height: 36px;
+                            line-height: 36px;
+                            border-radius:50%;
+                            background:rgb(255 255 255 / 10%);
+                            text-align: center;
+                            color: var(--theme-color-white);
+                            transition: 0.5s;
+                            position: relative;
+                            z-index: 1;
+                            &::after{
+                                position: absolute;
+                                z-index: -1;
+                                content: "";
+                                left: 0;
+                                top: 0;
+                                height: 100%;
+                                width: 100%;
+                                transform: scale(0);
+                                border-radius: 50%;
+                                background-color: var(--theme-primary);
+                                transition: all 300ms ease;
+                            }
+                            &:hover::after{
+                                transform: scale(1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .team-effiect1{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .team-effiect2{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}
+
+
+// team-page title
+.team-page-title {
+    background: var(--theme-bg-color1);
+    padding: 202px 0px 110px;
+    position: relative;
+    margin-top: -102px;
+    .title-content{
+        margin-bottom: 52px;
+        text-align: center;
+        .page-sub-title{
+            display: inline-block;
+            color: var(--theme-color-white);
+            font-family:var(--title-font);
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 30px;
+            border-radius: 40px;
+            position: relative;
+            background:#FFFFFF0D;
+            margin: 0;
+            &::before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 40px;
+                border: 1.5px solid transparent;
+                background: linear-gradient(91.06deg, #6766FF 6.82%, rgba(103, 102, 255, 0.2) 37.09%, rgba(103, 102, 255, 0.2) 67.36%, #6766FF 96.43%) border-box;
+                -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+            }
+        }
+        .page-title{
+            color: var(--theme-color-white);
+            font-weight: 700;
+            font-size: 50px;
+            line-height: 56px;
+            margin: 14px 0 5px;
+        }
+        .page-desc{
+            color: rgb(255 255 255 / 70%);
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 28px;
+            width: 40%;
+            margin:0px auto;
+            @include for-xxl{
+                width: 100%; 
+            }
+        }
+    }
+    .single-team-box{
+        background: var(--theme-color3);
+        border: 1px solid #FFFFFF33;
+        border-top-left-radius: 310px;
+        border-top-right-radius: 310px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        text-align: center;
+        padding:40px 20px 40px;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        .team-thumb{
+            margin-bottom: 32px;
+            figure{
+                border: 15px solid rgb(255 255 255 / 10%);
+                border-radius: 50%;
+                margin: 0;
+                img{}
+            }
+        }
+        .team-content-box{
+            position: relative;
+            z-index: 1;
+            .team-content{
+                .team-title{
+                    a{
+                        display: inline-block;
+                        color: var(--theme-color-white);
+                        font-family:var(--title-font);
+                        font-weight: 700;
+                        font-size: 34px;
+                        transition: 0.5s;
+                        &:hover{
+                            color: var(--theme-primary);
+                        }
+                    }
+                }
+                .team-desi{
+                    display: inline-block;
+                    color: var(--theme-color-white);
+                    font-family:var(--text-font);
+                    font-weight: 400;
+                    font-size: 15px;
+                    border: 1px solid rgb(255 255 255 / 10%);
+                    background:rgb(255 255 255 / 10%);
+                    border-radius: 40px;
+                    padding: 5px 22px;
+                    margin-bottom: 28px;
+                }
+            }
+            .team-social-icon{
+                ul{
+                    li{
+                        display: inline-block;
+                        margin: 0 3px;
+                        a{
+                            display: inline-block;
+                            width: 36px;
+                            height: 36px;
+                            line-height: 36px;
+                            border-radius:50%;
+                            background:rgb(255 255 255 / 10%);
+                            text-align: center;
+                            color: var(--theme-color-white);
+                            transition: 0.5s;
+                            position: relative;
+                            z-index: 1;
+                            &::after{
+                                position: absolute;
+                                z-index: -1;
+                                content: "";
+                                left: 0;
+                                top: 0;
+                                height: 100%;
+                                width: 100%;
+                                transform: scale(0);
+                                border-radius: 50%;
+                                background-color: var(--theme-primary);
+                                transition: all 300ms ease;
+                            }
+                            &:hover::after{
+                                transform: scale(1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .team-effiect1{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .team-effiect2{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
+}

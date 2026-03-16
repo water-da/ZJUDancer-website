@@ -1,0 +1,102 @@
+// brand area one
+.brand-area-one {
+    background: var(--theme-bg-color2);
+    .band-active{
+        overflow-x: hidden;
+        .brand-box{
+            text-align: center;
+        }
+    }
+    .brand-desc{
+        text-align: center;
+        padding-bottom: 35px;
+        p{
+            color: var(--theme-color-white);
+            font-family:var(--title-font);
+            font-weight: 600;
+            font-size: 20px;
+            text-align: center;
+            transition: 0.5s;
+            position: relative;
+            display: inline-block;
+            &::before{
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 180px;
+                background: url(../images/demo-img/brand-line1.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                left: -200px;
+            }
+            &::after{
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 180px;
+                background: url(../images/demo-img/brand-line2.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                right: -200px;
+            }
+            span{
+                display: inline-block;
+                color: var(--theme-primary);
+            }
+        }
+    }
+    &.style-two{
+        padding-bottom: 120px;
+    }
+    &.style-four{
+        .brand-container{
+            background: linear-gradient(180deg, #0B0523 0%, #1C1634 100%);
+            border-radius: 30px;
+            position: relative;
+            z-index: 1;
+            padding: 0 0 65px;
+            &::before{
+                content: "";
+                position: absolute;
+                top: 15px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 30px;
+                border: 1.5px solid transparent;
+                background:linear-gradient(360deg, rgba(255, 255, 255, 0.1) 0%, rgba(103, 102, 255, 0.3) 100%);
+                -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+            }
+        }      
+    }
+    &.inner{
+        padding: 0 0 120px;
+    }
+}
+
+
+// dashbord-section-one
+.dashbord-section-one{
+    background: var(--theme-bg-color1);
+    .dashbord-thumb{
+        figure{
+            margin: 0;
+            @include media-breakpoint-only(md){
+                width: 100%;
+            }
+            @include media-breakpoint-only(sm){
+                width: 100%;
+            }
+            img{
+                @include media-breakpoint-only(md){
+                    width: 100%;
+                }
+                @include media-breakpoint-only(sm){
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

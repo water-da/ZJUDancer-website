@@ -1,0 +1,367 @@
+// testimonia-section-one
+
+.testimonial-section-one{
+    padding: 120px 0 120px;
+    background: linear-gradient(360deg, #080220 0%, #120C2A 100%);
+    position: relative;
+    z-index: 1;
+    .testi-thumb-wrapper{
+        position: relative;
+        text-align: center;
+        @include media-breakpoint-only(lg){
+            display: none;
+        }
+        @include media-breakpoint-only(md){
+            display: none;
+        }
+        @include media-breakpoint-only(sm){
+            display: none;
+        }
+        .testi-thumb{
+            position: relative;
+            margin-left: -100px;
+            figure{}
+        }
+        .testi-thumb-circle{
+            position: absolute;
+            top: -115px;
+            left: 0;
+            animation: spin 16s linear infinite;
+            img{}
+        }
+        .testi-avatars-img{
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            .testimonial-autor1{
+                position: absolute;
+                top: -390px;
+                left: 30px;
+            }
+            .testimonial-autor2{
+                position: absolute;
+                top: -390px;
+                right: 110px;
+                @include media-breakpoint-only(xl){
+                    right: 40px;
+                }
+            }
+            .testimonial-autor3{
+                position: absolute;
+                top: -15px;
+                right: 140px;
+                @include media-breakpoint-only(xl){
+                    right: 50px;
+                }
+            }
+            .testimonial-autor4{
+                position: absolute;
+                bottom: -70px;
+                left: 40px;
+            }
+        }
+    }
+    .testi-active2{
+        .swiper-wrapper{
+            .swiper-slide{
+                .testi-box{
+                    .single-testi-box{
+                        background: linear-gradient(180deg, #0B0523 0%, #26203E 100%);
+                        position: relative;
+                        z-index: 1;
+                        border-radius: 30px;
+                        padding: 40px 30px 46px 40px;
+                        overflow: hidden;
+                        @include media-breakpoint-only(md){
+                            padding: 40px 10px 46px 10px;
+                        }
+                        &::before{
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            border-radius: 30px;
+                            border: 1.5px solid transparent;
+                            background:linear-gradient(136.7deg, #6766FF 6.8%, rgba(103, 102, 255, 0.3) 18.42%, rgba(103, 102, 255, 0.3) 83.88%, #6766FF 92.96%);
+                            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                            -webkit-mask-composite: destination-out;
+                            mask-composite: exclude;
+                        }
+                        &::after{
+                            position: absolute;
+                            content: "";
+                            width: 50%;
+                            height: 50%;
+                            background-image: url(../images/demo-img/testi-box-effect42.png);
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-size: cover;
+                            bottom: 0;
+                            right: 0;
+                            border-radius: 30px;
+                        }
+                        .testi-autor-box{
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-bottom: 35px;
+                            position: relative;
+                            z-index: 1;
+                            &::after{
+                                position: absolute;
+                                content: "";
+                                width: 100%;
+                                height: 100%;
+                                background-image: url(../images/demo-img/testi-box-effect41.png);
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                background-size: cover;
+                                left: -40px;
+                                top: -40px;
+                            }
+                            .testi-autor-content{
+                                .autor-title{
+                                    color: var(--theme-color-white);
+                                    font-family:var(--title-font);
+                                    font-weight: 600;
+                                    font-size: 26px;
+                                    line-height: 36px;
+                                    margin: 0;
+                                }
+                                .autor-desi{
+                                    color: rgb(255, 255, 255,0.7);
+                                    font-weight: 700;
+                                    font-size: 18px;
+                                    line-height: 26px;
+                                    margin: 0;
+                                }
+                                .testi-ratting{
+                                    li{
+                                        display: inline-block;
+                                        color: var(--theme-color4);
+                                        i{}
+                                    }
+                                }
+                            }
+                            .testi-autor{
+                                img{}
+                            }
+                        }
+                        .testi-desc{
+                            p{
+                                color: rgba(255, 255, 255, 0.7);
+                                font-weight: 400;
+                                font-size: 18px;
+                                line-height: 28px;
+                                margin: 0;
+                                display: flex;
+                                gap: 20px;
+                                align-items: start;
+                                img{
+                                    position: relative;
+                                    top: 6px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .testi-avatars-img > div img {
+        border: 3px solid transparent;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+    .testi-avatars-img > div.active img {
+        border-color:var(--theme-primary);
+        box-shadow: 0 0 10px rgba(103, 102, 255, 0.6);
+    }
+    .testimonial-effiect11{
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+
+
+// testimonia-section-two
+
+.testimonial-section-two{
+    background: var(--theme-bg-color1);
+    padding: 120px 0 135px;
+    position: relative;
+    overflow: hidden;
+    .sec-title{
+        position: relative;
+        z-index: 3;
+    }
+    .testimonial-active{
+        overflow-x: hidden;
+        position: relative;
+        z-index: 3;
+    }
+    .swiper-slide.swiper-slide-prev {
+        transform: translateX(8%) rotate(-7deg);
+        transform-origin: 165% 110%;
+    }
+    .swiper-slide.swiper-slide-next {
+        transform: translateX(-2%) rotate(7deg);
+        transform-origin: -70% 55%;
+    }
+    .swiper-slide.swiper-slide-active{
+        border: 1px solid var(--theme-primary);
+        border-radius: 30px;
+        .testi-box{
+            margin: 0;
+        }
+    }
+    .testi-box{
+        margin: 0 10px;
+        .single-testi-box{
+            border: 1px solid rgb(255, 255, 255,0.20);
+            background: var(--theme-color3);
+            padding: 45px 32px 42px;
+            border-radius: 30px;
+            transition: 0.5s;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            &::before{
+                position: absolute;
+                content: '';
+                width: 50%;
+                height: 50%;
+                background-image: url(../images/demo-img/testi-box-eff1.png);
+                @include background;
+                top: 0;
+                left: 0;
+            }
+            &::after{
+                position: absolute;
+                content: '';
+                width: 50%;
+                height: 50%;
+                background-image: url(../images/demo-img/testi-box-eff2.png);
+                @include background;
+                bottom: 0;
+                right: 0;
+            }
+            .testi-quote{
+                img{}
+            }
+            .testi-desc{
+                p{
+                    color: var(--theme-color-white);
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 28px;
+                    margin: 18px 0 15px;
+                }
+            }
+            .testi-ratting{
+                ul{
+                    li{
+                        display: inline-block;
+                        color: var(--theme-color4);
+                        i{}
+                    }
+                }
+            }
+            .testi-autor-box{
+                display: flex;
+                gap: 15px;
+                margin-top: 35px;
+                .testi-autor{
+                    img{
+                        width: 66px;
+                        height: 66px;
+                    }
+                }
+                .testi-autor-content{
+                    .autor-title{
+                        color: var(--theme-color-white);
+                        font-weight: 600;
+                        font-size: 24px;
+                        line-height: 32px;
+                        margin: 0;
+                    }
+                    .autor-desi{
+                        color: rgb(255, 255, 255,0.60);
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 26px;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .testimonial-effiect1{
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .swiper {
+        padding-bottom: 80px;
+    }
+    .swiper-pagination-bullet {
+        width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 16px)) !important;
+        height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 16px)) !important;
+        display: inline-block;
+        border-radius: var(--swiper-pagination-bullet-border-radius, 50%);
+        background: var(--swiper-pagination-bullet-inactive-color, transparent);
+        opacity: var(--swiper-pagination-bullet-inactive-opacity, 1);
+        border:1px solid #6766FF;
+        margin: 0 5px;
+    }
+    .swiper-pagination-bullet-active {
+        opacity: var(--swiper-pagination-bullet-opacity, 1);
+        background: var(--theme-primary, var(--theme-primary)) !important;
+    }
+    .swiper-pagination {
+        position: absolute;
+        text-align: center;
+        transition: 0.3s opacity;
+        transform: translate3d(0, 0, 0);
+        z-index: 10;
+        left: 0;
+        right: 0;
+        margin: auto;
+        bottom: -40px;
+    }
+    .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev {
+        transform: scale(1);
+    }
+    .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {
+        transform: scale(1);
+    }
+    .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev {
+        transform: scale(1);
+    }
+    .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next {
+        transform: scale(1);
+    }
+    .testimonial-side-effiect{
+        position: absolute;
+        left: 200px;
+        top: 200px;
+    }
+}
+
+
+
+
+

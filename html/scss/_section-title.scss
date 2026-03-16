@@ -1,0 +1,77 @@
+/*** 
+
+==============================
+Section Title
+==============================
+
+***/
+.sec-title{
+    margin-bottom: 55px;
+    .section-sub-title{
+        margin-bottom: 25px;
+        .sub-title{
+            display: inline-block;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--theme-color-white);
+            padding: 8px 30px;
+            border-radius: 40px;
+            position: relative;
+            background:#FFFFFF0D;
+            margin: 0;
+            &::before{
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: 40px;
+                border: 1.5px solid transparent;
+                background: linear-gradient(91.06deg, #6766FF 6.82%, rgba(103, 102, 255, 0.2) 37.09%, rgba(103, 102, 255, 0.2) 67.36%, #6766FF 96.43%) border-box;
+                -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+            }
+        }
+    }
+    .section-title{
+        .title{
+                color: var(--theme-color-white);
+                font-weight: 700;
+                font-size: 50px;
+                line-height: 56px;
+                margin: 0;
+            @include media-breakpoint-only(xl){
+                font-size: 45px;
+                line-height: 52px;
+            }
+            @include media-breakpoint-only(lg){
+                font-size: 40px;
+                line-height: 48px;
+            }
+            @include media-breakpoint-only(md){
+                font-size: 35px;
+                line-height: 45px;
+            }
+            @include media-breakpoint-only(sm){
+                font-size: 30px;
+                line-height: 40px;
+            }
+        }
+    }
+    .section-desc{
+        p{
+            color: rgba(255, 255, 255, 0.7);
+            font-family: var(--text-font);
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 28px;
+            width: 90%;
+            margin: 20px 0 0px;
+            @include media-breakpoint-only(lg){
+                width: 100%;
+            }
+        }
+    }
+}
