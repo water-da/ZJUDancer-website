@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Tutorial - ZJUDancer</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+  <!-- 全局导航栏 -->
+  <nav id="top-nav">
+    <div class="nav-logo">ZJUDancer</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="publications.html">Publications</a></li>
+
+      <li class="has-dropdown">
+        <a href="technology.html" class="active">Technology</a>
+        <ul class="dropdown">
+          <li><a href="tutorial.html" class="active">Tutorial</a></li>
+          <li><a href="documents.html">Documents</a></li>
+        </ul>
+      </li>
+
+      <li><a href="history.html">History</a></li>
+      <li><a href="media.html">Media</a></li>
+    </ul>
+  </nav>
+
+  <!-- 子页面页头 -->
+  <header class="subpage-header">
+    <h1>Tutorial</h1>
+    <p>Public Tutorials & Getting Started</p>
+  </header>
+
+  <section class="main style1">
+    <div class="container">
+
+      <header class="major"><h2>快速开始</h2></header>
+      <p>这里放给访客看的公开教程：例如环境搭建、运行 Demo、常见问题与开发规范等。</p>
+
+      <div class="row gtr-150">
+
+        <div class="col-6 col-12-medium">
+          <div class="tech-card">
+            <div class="tech-icon">🧰</div>
+            <h3>环境与工具链</h3>
+            <ul>
+              <li>系统要求：Windows / Ubuntu / macOS（按你们实际填写）</li>
+              <li>依赖安装：编译器、Python、CMake、驱动等</li>
+              <li>代码结构与基本命令</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-6 col-12-medium">
+          <div class="tech-card">
+            <div class="tech-icon">🧪</div>
+            <h3>仿真与运行</h3>
+            <ul>
+              <li>仿真平台介绍（Webots/Gazebo/自研等）</li>
+              <li>启动方式、参数说明、日志位置</li>
+              <li>如何复现一个最小 Demo</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="tech-card">
+            <div class="tech-icon">🛠️</div>
+            <h3>常见问题 (FAQ)</h3>
+            <ul>
+              <li>编译失败：缺依赖/版本不匹配</li>
+              <li>运行崩溃：配置文件路径/权限/模型文件缺失</li>
+              <li>视觉不出结果：相机标定/输入源/阈值参数</li>
+            </ul>
+            <p style="margin-top: 12px; opacity: 0.85;">
+              你可以把教程写成 Markdown 再转换成 HTML，或者直接在这里用小节堆内容。
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
