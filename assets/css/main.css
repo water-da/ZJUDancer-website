@@ -3855,3 +3855,40 @@ input, select, textarea {
   object-fit: cover;  /* 保持比例，填满容器，多余裁剪 */
   display: block;
 }
+
+
+.account-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  margin: 8px 0;
+  background: linear-gradient(135deg, #f6f9fc, #eef3f8);
+  border: 1px solid #dbe3ec;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-size: 15px;
+  color: #333;
+  transition: all 0.25s ease;
+}
+
+.account-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.account-label {
+  padding: 4px 10px;
+  background-color: #00a1d6;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.account-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f2d3d;
+}
