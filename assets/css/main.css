@@ -3856,7 +3856,6 @@ input, select, textarea {
   display: block;
 }
 
-
 .account-info {
   display: inline-flex;
   align-items: center;
@@ -3884,11 +3883,18 @@ input, select, textarea {
   font-size: 13px;
   font-weight: 600;
   border-radius: 999px;
-  letter-spacing: 0.5px;
 }
 
 .account-name {
   font-size: 15px;
   font-weight: 500;
   color: #1f2d3d;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
+
+.account-name:hover {
+  color: #00a1d6;
+  text-decoration: underline;
+}
+
