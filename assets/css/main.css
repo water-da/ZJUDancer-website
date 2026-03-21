@@ -3835,3 +3835,11 @@ input, select, textarea {
 #top-nav .has-dropdown .dropdown a:hover{
   background: rgba(255,255,255,0.06);
 }
+
+/* 固定卡片图片高度，宽度自适应，必要时裁剪不拉伸 */
+.fixed-card-img {
+  width: 100%;
+  height: 220px;      /* 想更高/更低就改这里，比如 260px */
+  object-fit: cover;  /* 裁剪填满，保持比例不变形 */
+  display: block;
+}
