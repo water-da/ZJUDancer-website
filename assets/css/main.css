@@ -3843,3 +3843,15 @@ input, select, textarea {
   object-fit: cover;  /* 裁剪填满，保持比例不变形 */
   display: block;
 }
+/* 三列卡片图片：统一容器高度 + 裁剪填充，保证三张视觉尺寸一致 */
+.col-4 .image.fit {
+  height: 220px;      /* 统一高度：这里改成你想要的高度 */
+  overflow: hidden;   /* 超出裁剪 */
+}
+
+.col-4 .image.fit img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* 保持比例，填满容器，多余裁剪 */
+  display: block;
+}
