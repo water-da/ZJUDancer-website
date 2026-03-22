@@ -29,61 +29,35 @@
     <p>Internal Docs (No Auth) & Team Materials</p>
   </header>
 
-  <section class="main style1">
-    <div class="container">
+  <section id="documentation" class="wrapper style1 special">
+  <div class="inner doc-container">
+    <div class="doc-layout">
+      <aside class="doc-sidebar">
+        <div class="doc-sidebar-title">Documents</div>
+        <nav id="doc-nav">
+          <ul>
+            <li><a href="#" data-md="docs/documents/index.md">Overview</a></li>
+            <li><a href="#" data-md="docs/documents/install.md">Installation</a></li>
+            <li><a href="#" data-md="docs/documents/architecture.md">Architecture</a></li>
+          </ul>
+        </nav>
+      </aside>
 
-      <header class="major"><h2>资料索引</h2></header>
-      <p>这里放战队成员使用的内部资料（不设权限）。建议按“规范 / 运维 / 知识库 / 记录”分类，方便快速查找。</p>
-
-    <div id="doc-list"></div>      
-    <!-- 用来放置以后会上传的文件 -->
-
-      <div class="row gtr-150">
-
-        <div class="col-6 col-12-medium">
-          <div class="tech-card">
-            <div class="tech-icon">📌</div>
-            <h3>流程与规范</h3>
-            <ul>
-              <li>代码规范 / 分支策略 / 提交规范</li>
-              <li>训练/比赛准备清单</li>
-              <li>值班/维护流程</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-6 col-12-medium">
-          <div class="tech-card">
-            <div class="tech-icon">🔧</div>
-            <h3>硬件与运维</h3>
-            <ul>
-              <li>硬件清单、备件表</li>
-              <li>标定流程（相机/IMU/步态参数）</li>
-              <li>常见故障与排查手册</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="tech-card">
-            <div class="tech-icon">🗂️</div>
-            <h3>链接区（可选）</h3>
-            <ul>
-              <li><a href="#" target="_blank" rel="noopener">内部知识库（Notion/Wiki/飞书等）</a></li>
-              <li><a href="#" target="_blank" rel="noopener">资料下载（网盘/Release/附件目录）</a></li>
-              <li><a href="#" target="_blank" rel="noopener">技术会议纪要归档</a></li>
-            </ul>
-            <p style="margin-top: 12px; opacity: 0.85;">
-              不设权限意味着任何拿到链接的人都能访问；如果未来要半公开，建议至少把敏感内容移出仓库或改用私有仓库/内网。
-            </p>
-          </div>
-        </div>
-
-      </div>
+      <main class="doc-main">
+        <article id="markdown-content" class="markdown-body">
+          <p>Loading document...</p>
+        </article>
+      </main>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="assets/js/markdown-docs.js"></script>
+  <link rel="stylesheet" href="assets/css/doc-theme.css" />>
+
 </body>
 </html>

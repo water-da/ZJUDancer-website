@@ -29,115 +29,35 @@
     <p>Public Tutorials & Getting Started</p>
   </header>
 
-  <section class="main style1">
-    <div class="container">
+<section id="tutorials" class="wrapper style1 special">
+  <div class="inner doc-container">
+    <div class="doc-layout">
+      <aside class="doc-sidebar">
+        <div class="doc-sidebar-title">Tutorials</div>
+        <nav id="doc-nav">
+          <ul>
+            <li><a href="#" data-md="docs/tutorials/index.md">Getting Started</a></li>
+            <li><a href="#" data-md="docs/tutorials/tutorial1.md">Tutorial 1</a></li>
+            <li><a href="#" data-md="docs/tutorials/tutorial2.md">Tutorial 2</a></li>
+          </ul>
+        </nav>
+      </aside>
 
-      <header class="major"><h2>快速开始</h2></header>
-      <p>这里放给访客看的公开教程：例如环境搭建、运行 Demo、常见问题与开发规范等。</p>
-
-
-
-
-
-<!-- 文档存放 -->
-<div class="tech-card">
-  <h3>文档</h3>
-  <ul>
-    <li>
-      <a href="docs/tutorial/Behavior_module.pdf" target="_blank" rel="noopener">Behavior_module.pdf（预览）</a>
-      &nbsp;|&nbsp;
-      <a href="docs/tutorial/Behavior_module.pdf" download>下载</a>
-    </li>
-    <li>
-      <a href="docs/tutorial/behavior_module_v2.pdf" target="_blank" rel="noopener">behavior_module_v2.pdf（预览）</a>
-      &nbsp;|&nbsp;
-      <a href="docs/tutorial/behavior_module_v2.pdf" download>下载</a>
-    </li>
-    <li>
-      <a href="docs/tutorial/Network_module.pdf" target="_blank" rel="noopener">Network_module.pdf（预览）</a>
-      &nbsp;|&nbsp;
-      <a href="docs/tutorial/Network_module.pdf" download>下载</a>
-    </li>
-    <li>
-      <a href="docs/tutorial/planner_module.pdf" target="_blank" rel="noopener">planner_module.pdf（预览）</a>
-      &nbsp;|&nbsp;
-      <a href="docs/tutorial/planner_module.pdf" download>下载</a>
-    </li>
-
-  </ul>
-</div>
-
-<!-- 在线预览 -->
-<div class="tech-card">
-  <h3>在线预览：Behavior_module</h3>
-  <div style="height: 75vh; border: 1px solid #ddd;">
-    <iframe
-      src="docs/tutorial/Behavior_module.pdf"
-      style="width: 100%; height: 100%; border: 0;"
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <p style="margin-top: 10px;">
-    <a href="docs/tutorial/Behavior_module.pdf" target="_blank" rel="noopener">新窗口打开</a>
-    &nbsp;|&nbsp;
-    <a href="docs/tutorial/Behavior_module.pdf" download>下载</a>
-  </p>
-</div>
-
-
-
-
-
-
-
-
-      <div class="row gtr-150">
-
-        <div class="col-6 col-12-medium">
-          <div class="tech-card">
-            <div class="tech-icon">🧰</div>
-            <h3>环境与工具链</h3>
-            <ul>
-              <li>系统要求：Windows / Ubuntu / macOS（按你们实际填写）</li>
-              <li>依赖安装：编译器、Python、CMake、驱动等</li>
-              <li>代码结构与基本命令</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-6 col-12-medium">
-          <div class="tech-card">
-            <div class="tech-icon">🧪</div>
-            <h3>仿真与运行</h3>
-            <ul>
-              <li>仿真平台介绍（Webots/Gazebo/自研等）</li>
-              <li>启动方式、参数说明、日志位置</li>
-              <li>如何复现一个最小 Demo</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="tech-card">
-            <div class="tech-icon">🛠️</div>
-            <h3>常见问题 (FAQ)</h3>
-            <ul>
-              <li>编译失败：缺依赖/版本不匹配</li>
-              <li>运行崩溃：配置文件路径/权限/模型文件缺失</li>
-              <li>视觉不出结果：相机标定/输入源/阈值参数</li>
-            </ul>
-            <p style="margin-top: 12px; opacity: 0.85;">
-              你可以把教程写成 Markdown 再转换成 HTML，或者直接在这里用小节堆内容。
-            </p>
-          </div>
-        </div>
-
-      </div>
+      <main class="doc-main">
+        <article id="markdown-content" class="markdown-body">
+          <p>Loading tutorial...</p>
+        </article>
+      </main>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="assets/js/markdown-docs.js"></script>
+  <link rel="stylesheet" href="assets/css/doc-theme.css" />
+
 </body>
 </html>
