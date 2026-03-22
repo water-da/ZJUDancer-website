@@ -5,260 +5,55 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/main.css" />
-
-  <style>
-    .doc-layout {
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-    }
-
-    .doc-sidebar {
-      width: 280px;
-      min-width: 240px;
-      text-align: left;
-    }
-
-    .doc-sidebar-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .doc-nav a {
-      display: block;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 0.4rem;
-      border-radius: 8px;
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s ease;
-    }
-
-    .doc-nav a:hover,
-    .doc-nav a.active {
-      background: rgba(0, 0, 0, 0.08);
-    }
-
-    .doc-main {
-      flex: 1;
-      min-width: 0;
-      text-align: left;
-    }
-
-    .doc-viewer-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      padding: 0.8rem 1rem;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.05);
-      flex-wrap: wrap;
-    }
-
-    .doc-viewer-info {
-      font-weight: 600;
-    }
-
-    .doc-viewer-actions {
-      display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .doc-btn {
-      display: inline-block;
-      padding: 0.5rem 0.9rem;
-      border-radius: 8px;
-      text-decoration: none;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      color: #222;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-
-    .doc-btn:hover {
-      background: #f3f3f3;
-    }
-
-    #pdf-container {
-      width: 100%;
-    }
-
-    .pdf-page {
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .pdf-page canvas {
-      max-width: 100%;
-      height: auto;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
-      background: #fff;
-    }
-
-    .doc-loading,
-    .doc-error {
-      padding: 2rem 1rem;
-      text-align: center;
-      font-size: 1rem;
-    }
-
-    @media screen and (max-width: 980px) {
-      .doc-layout {
-        flex-direction: column;
-      }
-
-      .doc-sidebar {
-        width: 100%;
-        min-width: 0;
-      }
-    }
-  </style>
 </head>
 
 <body class="is-preload" data-page="tutorials">
 
-  <nav id="top-nav">
-    <div class="nav-logo">ZJUDancer</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="team.html">Team</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="tutorial.html" class="active">Tutorial</a></li>
-      <li><a href="documents.html">Documents</a></li>
-      <li><a href="history.html">History</a></li>
-      <li><a href="media.html">Media</a></li>
-    </ul>
-  </nav>
 
+    <!-- 全局导航栏 (Team 高亮) -->
+    <nav id="top-nav">
+        <div class="nav-logo">ZJUDancer</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="tutorial.html"  class="active">Tutorial</a></li> 
+            <li><a href="documents.html">Documents</a></li> 
+		        <li><a href="history.html">History</a></li> 
+            <li><a href="media.html">Media</a></li>
+        </ul>
+    </nav>
+
+  <!-- 子页面页头 -->
   <header class="subpage-header">
     <h1>Tutorial</h1>
     <p>Public Tutorials & Getting Started</p>
   </header>
 
-  <section id="tutorials" class="wrapper style1 special">
-    <div class="inner doc-container">
-      <div class="doc-layout">
-        <aside class="doc-sidebar">
-          <div class="doc-sidebar-title">Tutorials</div>
+<section id="tutorials" class="wrapper style1 special">
+  <div class="inner doc-container">
+    <div class="doc-layout">
+      <aside class="doc-sidebar">
+        <div class="doc-sidebar-title">Tutorials</div>
           <nav id="doc-nav" class="doc-nav"></nav>
-        </aside>
 
-        <main class="doc-main">
-          <div class="doc-viewer-toolbar">
-            <div id="doc-title" class="doc-viewer-info">Loading tutorial...</div>
-            <div class="doc-viewer-actions">
-              <a id="open-pdf-link" class="doc-btn" href="#" target="_blank" rel="noopener">Open PDF</a>
-              <a id="download-pdf-link" class="doc-btn" href="#" download>Download PDF</a>
-            </div>
-          </div>
+      </aside>
 
-          <div id="pdf-container">
-            <div class="doc-loading">Loading tutorial...</div>
-          </div>
-        </main>
-      </div>
+      <main class="doc-main">
+        <article id="markdown-content" class="markdown-body">
+          <p>Loading tutorial...</p>
+        </article>
+      </main>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/main.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.js"></script>
-  <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js";
-
-    const tutorialDocs = [
-      { id: "getting-started", title: "Getting Started", file: "assets/docs/tutorials/getting-started.pdf" },
-      { id: "behavior-module", title: "Behavior Module", file: "assets/docs/tutorials/behavior_module_v2.pdf" },
-      { id: "network-module", title: "Network Module", file: "assets/docs/tutorials/network_module.pdf" }
-    ];
-
-    const navEl = document.getElementById("doc-nav");
-    const pdfContainer = document.getElementById("pdf-container");
-    const docTitle = document.getElementById("doc-title");
-    const openPdfLink = document.getElementById("open-pdf-link");
-    const downloadPdfLink = document.getElementById("download-pdf-link");
-
-    function getDocIdFromQuery() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("doc") || tutorialDocs[0].id;
-    }
-
-    function buildSidebar(activeId) {
-      navEl.innerHTML = "";
-      tutorialDocs.forEach(doc => {
-        const a = document.createElement("a");
-        a.href = `tutorial.html?doc=${encodeURIComponent(doc.id)}`;
-        a.textContent = doc.title;
-        if (doc.id === activeId) a.classList.add("active");
-        navEl.appendChild(a);
-      });
-    }
-
-    async function renderPDF(url) {
-      pdfContainer.innerHTML = `<div class="doc-loading">Loading PDF...</div>`;
-
-      try {
-        const loadingTask = pdfjsLib.getDocument(url);
-        const pdf = await loadingTask.promise;
-
-        pdfContainer.innerHTML = "";
-
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-          const page = await pdf.getPage(pageNum);
-
-          const containerWidth = pdfContainer.clientWidth || 900;
-          const unscaledViewport = page.getViewport({ scale: 1 });
-          const scale = Math.min(containerWidth / unscaledViewport.width, 1.6);
-          const viewport = page.getViewport({ scale });
-
-          const pageWrapper = document.createElement("div");
-          pageWrapper.className = "pdf-page";
-
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
-
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-
-          pageWrapper.appendChild(canvas);
-          pdfContainer.appendChild(pageWrapper);
-
-          await page.render({
-            canvasContext: context,
-            viewport: viewport
-          }).promise;
-        }
-      } catch (err) {
-        console.error(err);
-        pdfContainer.innerHTML = `<div class="doc-error">Failed to load PDF.</div>`;
-      }
-    }
-
-    async function loadCurrentDoc() {
-      const currentId = getDocIdFromQuery();
-      const doc = tutorialDocs.find(d => d.id === currentId) || tutorialDocs[0];
-
-      buildSidebar(doc.id);
-      docTitle.textContent = doc.title;
-      openPdfLink.href = doc.file;
-      downloadPdfLink.href = doc.file;
-
-      await renderPDF(doc.file);
-    }
-
-    loadCurrentDoc();
-    window.addEventListener("resize", () => {
-      clearTimeout(window.__pdfResizeTimer);
-      window.__pdfResizeTimer = setTimeout(loadCurrentDoc, 300);
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="assets/js/markdown-docs.js"></script>
+  <link rel="stylesheet" href="assets/css/doc-theme.css" />
+  <script src="assets/js/doc-config.js"></script>
 </body>
 </html>
