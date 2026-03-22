@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
-<body class="is-preload">
+<body class="is-preload" data-page="documents">
 
     <!-- 全局导航栏 (History 高亮) -->
     <nav id="top-nav">
@@ -34,13 +34,8 @@
     <div class="doc-layout">
       <aside class="doc-sidebar">
         <div class="doc-sidebar-title">Documents</div>
-        <nav id="doc-nav">
-          <ul>
-            <li><a href="#" data-md="docs/documents/index.md">Overview</a></li>
-            <li><a href="#" data-md="docs/documents/install.md">Installation</a></li>
-            <li><a href="#" data-md="docs/documents/architecture.md">Architecture</a></li>
-          </ul>
-        </nav>
+          <nav id="doc-nav" class="doc-nav"></nav>
+
       </aside>
 
       <main class="doc-main">
