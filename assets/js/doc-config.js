@@ -20,6 +20,11 @@ const DOCUMENTS_NAV = [
     ]
   },
   {
+  title: "Behavior 模块代码阅读",
+  file: "docs/documents/behavior_module_v2.md",
+  docId: "behavior-module-v2"
+  },
+  {
     title: "Architecture",
     children: [
       {
@@ -35,6 +40,7 @@ const DOCUMENTS_NAV = [
     ]
   }
 ];
+
 const TUTORIALS_NAV = [
   {
     title: "Getting Started",
