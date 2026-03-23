@@ -9,12 +9,12 @@ const DOCUMENTS_NAV = [
     children: [
       {
         title: "Behavior Module 第一版",
-        file: "docs/documents/behavior_module.md",
+        file: "docs/documents/Behavior_module.pdf",
         docId: "behavior-module"
       },
       {
         title: "Behavior Module 第二版",
-        file: "docs/documents/Behavior_module_v2.pdf",
+        file: "docs/documents/behavior_module_v2.pdf",
         docId: "behavior-module-v2"
       }
     ]

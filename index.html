@@ -11,10 +11,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        <!-- 引入我们上一轮分离出来的弹窗样式 -->
         <link rel="stylesheet" href="assets/css/details-modal.css" />
 	</head>
 	<body class="is-preload">
+
+		<!-- 顶部固定导航栏 -->
+		<nav id="top-nav">
+			<div class="nav-logo">ZJUDancer</div>
+			<ul class="nav-links">
+				<li><a href="index.html" class="active">Home</a></li>
+				<li><a href="team.html">Team</a></li>
+				<li><a href="publications.html">Publications</a></li>
+				<li><a href="tutorial.html">Tutorial</a></li>
+				<li><a href="documents.html">Documents</a></li>
+				<li><a href="history.html">History</a></li>
+				<li><a href="media.html">Media</a></li>
+				<li class="lang-switch"><a href="#">中 | EN</a></li>
+			</ul>
+		</nav>
 
 		<!-- Header -->
 			<section id="header">
@@ -43,7 +57,6 @@
                             <p>在赛场上，我们的机器人没有外部人为干预，完全依靠自身的传感器感知环境、依靠内置的大脑进行战术决策。我们不仅是在踢足球，更是在机器人的创新道路上奋楫扬帆。</p>
 						</div>
 						<div class="col-6 col-12-medium imp-medium">
-							<!-- 加上 max-width 限制大小，margin: 0 auto 让图片保持居中 -->
 							<span class="image fit" style="max-width: 70%; margin: 0 auto;">
 								<img src="images/20500940.png" alt="ZJUDancer 机器人比赛实况" />
 							</span>
@@ -92,19 +105,16 @@
 							<span class="image fit"><img class="fixed-card-img" src="images/机器视觉.jpg" alt="视觉感知系统" /></span>
 							<h3>👁️ 视觉感知</h3>
 							<p>通过视觉系统识别外界环境，实现对足球、球门、场地线等元素的精准识别与定位。</p>
-
 						</div>
 						<div class="col-4 col-12-medium">
 							<span class="image fit"><img class="fixed-card-img" src="images/机器人步态示意图.jpg" alt="运动控制系统" /></span>
 							<h3>⚙️ 动作步态</h3>
 							<p>通过调整机器人的步态参数，保证机器人的步态协调，实现精确的方向与步幅控制。</p>
-
 						</div>
 						<div class="col-4 col-12-medium">
 							<span class="image fit"><img class="fixed-card-img" src="images/机器人通信.jpg" alt="战术决策系统" /></span>
 							<h3>🧠 策略通信</h3>
 							<p>基于视觉的信息，机器人能够根据实时赛况与自身角色，自主决定是带球突破、传球助攻还是回撤防守。</p>
-
 						</div>
 					</div>
 				</div>
@@ -127,12 +137,26 @@
 		<!-- Footer -->
 			<section id="footer">
 				<ul class="icons">
-                    <!-- 可以替换为战队的 B站、Github、公众号等链接 -->
-					<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon brands alt fa-weixin"><span class="label">WeChat</span></a></li>
-					<li><a href="#" class="icon brands alt fa-bilibili"><span class="label">Bilibili</span></a></li>
-					<li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+					<li>
+						<a href="https://github.com/ZJUDancer" target="_blank" rel="noopener noreferrer" class="icon brands alt fa-github">
+							<span class="label">GitHub</span>
+						</a>
+					</li>
+					<li>
+						<a href="mailto:contact@zjudancer.com" class="icon solid alt fa-envelope">
+							<span class="label">Email</span>
+						</a>
+					</li>
 				</ul>
+
+				<ul class="icons" style="margin-top: 1.25rem;">
+					<li>
+						<a href="wechat.html" class="icon brands alt fa-weixin">
+							<span class="label">WeChat</span>
+						</a>
+					</li>
+				</ul>
+
 				<ul class="copyright">
 					<li>&copy; ZJUDancer Team. All rights reserved.</li>
 				</ul>
@@ -145,24 +169,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-            <!-- 引入我们上一轮分离出来的弹窗逻辑 -->
             <script src="assets/js/details-modal.js"></script>
 
 	</body>
-	<!-- 顶部固定导航栏 -->
-<nav id="top-nav">
-    <div class="nav-logo">ZJUDancer</div>
-    <ul class="nav-links">
-        <!-- class="active" 表示当前所在的页面，文字会高亮 -->
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="team.html">Team</a></li>
-        <li><a href="publications.html">Publications</a></li>
-		<li><a href="tutorial.html">Tutorial</a></li> 
-		<li><a href="documents.html">Documents</a></li> 
-		<li><a href="history.html">History</a></li> 
-        <li><a href="media.html">Media</a></li>
-        <li class="lang-switch"><a href="#">中 | EN</a></li>
-    </ul>
-</nav>
-
 </html>
