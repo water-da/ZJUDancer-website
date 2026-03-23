@@ -14,7 +14,7 @@ const DOCUMENTS_NAV = [
       },
       {
         title: "Behavior Module 第二版",
-        file: "docs/documents/behavior_module_v2.pdf",
+        file: "docs/documents/Behavior_module_v2.pdf",
         docId: "behavior-module-v2"
       }
     ]
@@ -29,7 +29,7 @@ const DOCUMENTS_NAV = [
     children: [
       {
         title: "Planner Module Code Reading",
-        file: "docs/documents/planner_module_v2.pdf",
+        file: "docs/documents/planner_module.pdf",
         docId: "planner-module-overview"
       },
       {
