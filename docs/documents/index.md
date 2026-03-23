@@ -3,15 +3,14 @@
 欢迎来到 **ZJUDancer** 文档页面。
 
 这里用于存放团队内部资料、模块说明和代码阅读笔记。  
-如果你现在能看到这段文字，说明 **Markdown 渲染已经正常工作**。
 
 ## Contents
 
 - Overview
-- Strategy Modules
-- Network Module
-- Gait Code Reading
-- Tutorials
+- 策略模块代码
+- 步态模块代码
+- 视觉模块代码
+
 
 ## Quick Notes
 
