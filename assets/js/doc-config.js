@@ -1,8 +1,13 @@
 const DOCUMENTS_NAV = [
   {
     title: "Overview",
-    file: "docs/documents/index.md",
-    docId: "overview"
+    children: [
+      {
+        title: "Overview",
+        file: "docs/documents/index.md",
+        docId: "overview"
+      }
+    ]
   },
   {
     title: "Behavior Module",
@@ -10,7 +15,7 @@ const DOCUMENTS_NAV = [
       {
         title: "Behavior Module 第一版",
         file: "docs/documents/Behavior_module.pdf",
-        docId: "behavior-module"
+        docId: "behavior-module-v1"
       },
       {
         title: "Behavior Module 第二版",
@@ -20,9 +25,14 @@ const DOCUMENTS_NAV = [
     ]
   },
   {
-  title: "Network_Module",
-  file: "docs/documents/Network_module.pdf",
-  docId: "Network-module"
+    title: "Network Module",
+    children: [
+      {
+        title: "Network Module",
+        file: "docs/documents/Network_module.pdf",
+        docId: "network-module"
+      }
+    ]
   },
   {
     title: "步态代码阅读",
@@ -44,8 +54,13 @@ const DOCUMENTS_NAV = [
 const TUTORIALS_NAV = [
   {
     title: "Getting Started",
-    file: "docs/tutorials/index.md",
-    docId: "getting-started"
+    children: [
+      {
+        title: "Getting Started",
+        file: "docs/tutorials/index.md",
+        docId: "getting-started"
+      }
+    ]
   },
   {
     title: "Beginner",

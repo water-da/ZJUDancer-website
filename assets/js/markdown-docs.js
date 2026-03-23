@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function loadDocument(item) {
     if (!item.file) {
+      contentRoot.className = "doc-content";
       contentRoot.innerHTML = "<p>No file found.</p>";
       return;
     }
@@ -68,15 +69,44 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function collapseAllGroups() {
+    document.querySelectorAll(".doc-subnav").forEach(el => {
+      el.classList.remove("open");
+    });
+    document.querySelectorAll(".doc-nav-toggle").forEach(el => {
+      el.classList.remove("open");
+    });
+  }
+
+  function expandGroup(toggleBtn, subList) {
+    if (toggleBtn && subList) {
+      toggleBtn.classList.add("open");
+      subList.classList.add("open");
+    }
+  }
+
+  function activateLink(link, item) {
+    document.querySelectorAll(".doc-link").forEach(el => el.classList.remove("active"));
+    link.classList.add("active");
+    loadDocument(item);
+
+    const parentSubnav = link.closest(".doc-subnav");
+    if (parentSubnav) {
+      const parentWrapper = parentSubnav.closest(".doc-nav-item");
+      const toggleBtn = parentWrapper ? parentWrapper.querySelector(".doc-nav-toggle") : null;
+      expandGroup(toggleBtn, parentSubnav);
+    }
+  }
+
   function createNavItem(item) {
     const wrapper = document.createElement("div");
     wrapper.className = "doc-nav-item";
 
     if (item.children && item.children.length) {
-      const groupTitle = document.createElement("div");
-      groupTitle.className = "doc-nav-group";
-      groupTitle.textContent = item.title;
-      wrapper.appendChild(groupTitle);
+      const toggle = document.createElement("button");
+      toggle.className = "doc-nav-toggle";
+      toggle.type = "button";
+      toggle.textContent = item.title;
 
       const subList = document.createElement("div");
       subList.className = "doc-subnav";
@@ -84,27 +114,34 @@ document.addEventListener("DOMContentLoaded", function () {
       item.children.forEach(child => {
         const link = document.createElement("button");
         link.className = "doc-link";
+        link.type = "button";
         link.textContent = child.title;
+        link.dataset.docId = child.docId || "";
 
         link.addEventListener("click", function () {
-          document.querySelectorAll(".doc-link").forEach(el => el.classList.remove("active"));
-          link.classList.add("active");
-          loadDocument(child);
+          activateLink(link, child);
         });
 
         subList.appendChild(link);
       });
 
+      toggle.addEventListener("click", function () {
+        const isOpen = subList.classList.contains("open");
+        subList.classList.toggle("open", !isOpen);
+        toggle.classList.toggle("open", !isOpen);
+      });
+
+      wrapper.appendChild(toggle);
       wrapper.appendChild(subList);
     } else {
       const link = document.createElement("button");
       link.className = "doc-link";
+      link.type = "button";
       link.textContent = item.title;
+      link.dataset.docId = item.docId || "";
 
       link.addEventListener("click", function () {
-        document.querySelectorAll(".doc-link").forEach(el => el.classList.remove("active"));
-        link.classList.add("active");
-        loadDocument(item);
+        activateLink(link, item);
       });
 
       wrapper.appendChild(link);
@@ -120,9 +157,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
   const targetDocId = params.get("doc");
 
-  let defaultDoc = null;
-  let defaultButton = null;
-
   function findFirstDoc(items) {
     for (const item of items) {
       if (item.children && item.children.length) {
@@ -137,22 +171,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function activateByDocId(items) {
     const buttons = document.querySelectorAll(".doc-link");
-    let buttonIndex = 0;
 
+    let buttonIndex = 0;
     for (const item of items) {
       if (item.children && item.children.length) {
         for (const child of item.children) {
           if (child.docId === targetDocId) {
-            buttons[buttonIndex].classList.add("active");
-            loadDocument(child);
+            const btn = buttons[buttonIndex];
+            if (btn) {
+              btn.classList.add("active");
+              loadDocument(child);
+
+              const subnav = btn.closest(".doc-subnav");
+              const wrapper = btn.closest(".doc-nav-item");
+              const toggle = wrapper ? wrapper.querySelector(".doc-nav-toggle") : null;
+              expandGroup(toggle, subnav);
+            }
             return true;
           }
           buttonIndex++;
         }
       } else if (item.file) {
         if (item.docId === targetDocId) {
-          buttons[buttonIndex].classList.add("active");
-          loadDocument(item);
+          const btn = buttons[buttonIndex];
+          if (btn) {
+            btn.classList.add("active");
+            loadDocument(item);
+          }
           return true;
         }
         buttonIndex++;
@@ -166,11 +211,16 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  defaultDoc = findFirstDoc(NAV_DATA);
-  defaultButton = document.querySelector(".doc-link");
+  const defaultDoc = findFirstDoc(NAV_DATA);
+  const defaultButton = document.querySelector(".doc-link");
 
   if (defaultDoc && defaultButton) {
     defaultButton.classList.add("active");
     loadDocument(defaultDoc);
+
+    const subnav = defaultButton.closest(".doc-subnav");
+    const wrapper = defaultButton.closest(".doc-nav-item");
+    const toggle = wrapper ? wrapper.querySelector(".doc-nav-toggle") : null;
+    expandGroup(toggle, subnav);
   }
 });

@@ -296,3 +296,115 @@
   background: #fff;
   border-radius: 8px;
 }
+.doc-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background: #f8f9fb;
+  border-right: 1px solid #e5e7eb;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.doc-sidebar-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.doc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.doc-nav-item {
+  display: block;
+}
+
+.doc-nav-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.doc-nav-toggle:hover {
+  background: #eef2f7;
+  color: #374151;
+}
+
+.doc-nav-toggle::after {
+  content: "▸";
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.doc-nav-toggle.open::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.doc-subnav {
+  display: none;
+  margin-top: 0.35rem;
+  margin-left: 0.35rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid #e5e7eb;
+}
+
+.doc-subnav.open {
+  display: block;
+}
+
+.doc-link {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.55rem 0.85rem;
+  margin: 0.15rem 0;
+  text-align: left;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  color: #374151;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.doc-link:hover {
+  background: #eef2f7;
+  color: #111827;
+}
+
+.doc-link.active {
+  background: #e8f1ff;
+  color: #155eef;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 980px) {
+  .doc-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+}
