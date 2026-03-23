@@ -13,6 +13,7 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         <link rel="stylesheet" href="assets/css/details-modal.css" />
 	</head>
+	
 	<body class="is-preload">
 
 		<!-- 顶部固定导航栏 -->
@@ -85,7 +86,7 @@
 								<h2>高度集成的软硬件系统<br />
 								全栈自研的核心架构</h2>
 							</header>
-							<p><strong>实时环境感知：</strong> 搭载完整视觉模型与高效图像处理算法，我们的机器人能在赛场复杂光照变化下，以 60fps 的帧率精准识别足球、球门、场地线以及场上的其他机器人，并完成高精度的自我定位。</p>
+							<p><strong>实时环境感知：</strong> 搭载完整视觉模型与高效图像处理算法，我们的机器人能在赛场复杂光照变化下，以较高帧率精准识别足球、球门、场地线以及场上的其他机器人，并完成高精度的自我定位。</p>
 							<p><strong>全向动态步行：</strong> 赋予机器人强健的机体。基于先进的技术（后续可以补充），自主研发的运动学解算引擎让机器人能够实现赛场上的高速、稳定双足行走/奔跑，并在跌倒后迅速起身。</p>
 							<p><strong>多机器人协作：</strong> 足球是一项团队运动，机器人也不例外。通过高效的局域网通信，场上的不同角色机器人能够共享全局信息，并利用行为树（Behavior Trees）进行动态的目标分配与战术执行。</p>
 						</div>
@@ -132,18 +133,20 @@
 			</section>
 
 
-		<!-- Footer -->
+			<!-- Footer -->
 			<section id="footer">
-				<ul class="icons">
+				<ul class="icons contact-icons">
 					<li>
 						<a href="https://github.com/ZJUDancer" target="_blank" rel="noopener noreferrer" class="icon brands alt fa-github">
 							<span class="label">GitHub</span>
 						</a>
 					</li>
-					<li>
-						<a href="mailto:contact@zjudancer.com" class="icon solid alt fa-envelope">
+
+					<li class="email-toggle-item">
+						<a href="javascript:void(0);" id="email-toggle" class="icon solid alt fa-envelope">
 							<span class="label">Email</span>
 						</a>
+						<span id="email-text" class="email-text">3240104617@zju.edu.cn</span>
 					</li>
 				</ul>
 
@@ -160,6 +163,7 @@
 				</ul>
 			</section>
 
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -168,6 +172,19 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
             <script src="assets/js/details-modal.js"></script>
+            <script>
+				document.addEventListener("DOMContentLoaded", function () {
+					const emailToggle = document.getElementById("email-toggle");
+					const emailText = document.getElementById("email-text");
+
+					if (emailToggle && emailText) {
+						emailToggle.addEventListener("click", function (e) {
+							e.preventDefault();
+							emailText.classList.toggle("show");
+						});
+					}
+				});
+			</script>
 
 	</body>
 </html>
