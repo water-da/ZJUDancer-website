@@ -10,45 +10,56 @@ const DOCUMENTS_NAV = [
     ]
   },
   {
-    title: "Behavior Module",
+    title: "策略代码阅读",
     children: [
       {
-        title: "Behavior Module 第一版",
-        file: "docs/documents/Behavior_module.pdf",
-        docId: "behavior-module-v1"
+        title: "Behavior",
+        children: [
+          {
+            title: "第一版",
+            file: "docs/documents/Behavior_module.pdf",
+            docId: "behavior-module-v1"
+          },
+          {
+            title: "第二版",
+            file: "docs/documents/behavior_module_v2.pdf",
+            docId: "behavior-module-v2"
+          }
+        ]
       },
       {
-        title: "Behavior Module 第二版",
-        file: "docs/documents/behavior_module_v2.pdf",
-        docId: "behavior-module-v2"
+        title: "Network",
+        children: [
+          {
+            title: "Network Module",
+            file: "docs/documents/Network_module.pdf",
+            docId: "network-module"
+          }
+        ]
       }
     ]
   },
-  {
-    title: "Network Module",
-    children: [
-      {
-        title: "Network Module",
-        file: "docs/documents/Network_module.pdf",
-        docId: "network-module"
-      }
-    ]
-  },
+
   {
     title: "步态代码阅读",
     children: [
       {
-        title: "Planner Module Code Reading",
+        title: "Planner Module ",
         file: "docs/documents/planner_module.pdf",
         docId: "planner-module-overview"
       },
-      {
-        title: "Modules",
-        file: "docs/documents/modules.md",
-        docId: "modules"
-      }
+      
     ]
-  }
+  },
+    {
+    title: "视觉代码阅读",
+    children: [
+      {
+        
+      },
+      
+    ]
+  },
 ];
 
 const TUTORIALS_NAV = [
