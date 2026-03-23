@@ -5,32 +5,32 @@ const DOCUMENTS_NAV = [
     docId: "overview"
   },
   {
-    title: "Getting Started",
+    title: "Behavior Module",
     children: [
       {
-        title: "Installation",
-        file: "docs/documents/install.md",
-        docId: "install"
+        title: "Behavior Module 第一版",
+        file: "docs/documents/behavior_module.md",
+        docId: "behavior-module"
       },
       {
-        title: "Configuration",
-        file: "docs/documents/configuration.md",
-        docId: "configuration"
+        title: "Behavior Module 第二版",
+        file: "docs/documents/behavior_module_v2.pdf",
+        docId: "behavior-module-v2"
       }
     ]
   },
   {
-  title: "Behavior 模块代码阅读",
-  file: "docs/documents/behavior_module_v2.md",
-  docId: "behavior-module-v2"
+  title: "Network_Module",
+  file: "docs/documents/Network_module.pdf",
+  docId: "Network-module"
   },
   {
-    title: "Architecture",
+    title: "步态代码阅读",
     children: [
       {
-        title: "Overview",
-        file: "docs/documents/architecture.md",
-        docId: "architecture-overview"
+        title: "Planner Module Code Reading",
+        file: "docs/documents/planner_module_v2.pdf",
+        docId: "planner-module-overview"
       },
       {
         title: "Modules",
