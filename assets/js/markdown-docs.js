@@ -1,154 +1,176 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const navContainer = document.getElementById("doc-nav");
-  const content = document.getElementById("markdown-content");
+  const pageType = document.body.dataset.page;
+  const navRoot = document.getElementById("doc-nav");
+  const contentRoot = document.getElementById("doc-content");
 
-  // 根据页面选择导航配置
-  const pageType = document.body.dataset.page; 
-  const NAV_CONFIG = pageType === "tutorials" ? TUTORIALS_NAV : DOCUMENTS_NAV;
+  const NAV_DATA = pageType === "documents" ? DOCUMENTS_NAV : TUTORIALS_NAV;
 
-  function createNavTree(items, level = 0) {
-    const ul = document.createElement("ul");
-    ul.className = `doc-nav-level doc-nav-level-${level}`;
-
-    items.forEach(item => {
-      const li = document.createElement("li");
-      li.className = "doc-nav-item";
-
-      // 情况1：这是一个分类节点
-      if (item.children && item.children.length > 0) {
-        li.classList.add("has-children");
-
-        const button = document.createElement("button");
-        button.className = "doc-nav-toggle";
-        button.type = "button";
-        button.innerHTML = `
-          <span class="doc-nav-arrow">▸</span>
-          <span class="doc-nav-title">${item.title}</span>
-        `;
-
-        button.addEventListener("click", function () {
-          li.classList.toggle("open");
-        });
-
-        li.appendChild(button);
-        li.appendChild(createNavTree(item.children, level + 1));
-      }
-      // 情况2：这是一个文档叶子节点
-      else if (item.file) {
-        const link = document.createElement("a");
-        link.href = `?doc=${encodeURIComponent(item.docId || "")}`;
-        link.className = "doc-nav-link";
-        link.textContent = item.title;
-        link.dataset.md = item.file;
-        link.dataset.docId = item.docId || "";
-
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          loadMarkdown(item.file, item.docId, link);
-        });
-
-        li.appendChild(link);
-      }
-
-      ul.appendChild(li);
-    });
-
-    return ul;
+  function getFileType(file) {
+    if (!file) return "";
+    return file.split(".").pop().toLowerCase();
   }
 
-  async function loadMarkdown(path, docId, clickedLink = null) {
-    try {
-      content.innerHTML = "<p>Loading...</p>";
+  function renderMarkdown(file) {
+    contentRoot.className = "doc-content markdown-body";
+    contentRoot.innerHTML = "<p>Loading markdown...</p>";
 
-      const response = await fetch(path);
-      if (!response.ok) throw new Error("Failed to load markdown file.");
+    fetch(file)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to load markdown");
+        }
+        return response.text();
+      })
+      .then(text => {
+        contentRoot.innerHTML = marked.parse(text);
+      })
+      .catch(error => {
+        contentRoot.innerHTML = `<p>Failed to load document: ${error.message}</p>`;
+      });
+  }
 
-      const mdText = await response.text();
-      content.innerHTML = marked.parse(mdText);
+  function renderPDF(file) {
+    contentRoot.className = "doc-content";
+    contentRoot.innerHTML = `
+      <div class="doc-toolbar">
+        <a href="${file}" target="_blank" class="button small">Open PDF in New Tab</a>
+        <a href="${file}" download class="button small">Download PDF</a>
+      </div>
+      <iframe class="pdf-frame" src="${file}"></iframe>
+    `;
+  }
 
-      highlightActiveLink(docId);
+  function loadDocument(item) {
+    if (!item.file) {
+      contentRoot.innerHTML = "<p>No file found.</p>";
+      return;
+    }
 
-      const url = new URL(window.location);
-      if (docId) {
-        url.searchParams.set("doc", docId);
-      }
-      history.replaceState(null, "", url);
+    const type = getFileType(item.file);
 
-      // 如有代码高亮库，可以在这里执行
-      if (window.hljs) {
-        document.querySelectorAll("pre code").forEach((el) => {
-          hljs.highlightElement(el);
-        });
-      }
-    } catch (error) {
-      content.innerHTML = `
-        <h2>Error</h2>
-        <p>Unable to load document: ${path}</p>
-        <pre>${error.message}</pre>
+    if (type === "md") {
+      renderMarkdown(item.file);
+    } else if (type === "pdf") {
+      renderPDF(item.file);
+    } else {
+      contentRoot.className = "doc-content";
+      contentRoot.innerHTML = `
+        <div class="doc-toolbar">
+          <a href="${item.file}" target="_blank" class="button small">Open File</a>
+          <a href="${item.file}" download class="button small">Download File</a>
+        </div>
+        <p>This file type is not previewable in the current page.</p>
       `;
     }
+
+    if (item.docId) {
+      history.replaceState(null, "", `?doc=${encodeURIComponent(item.docId)}`);
+    }
   }
 
-  function highlightActiveLink(docId) {
-    document.querySelectorAll(".doc-nav-link").forEach(link => {
-      link.classList.remove("active");
-      if (link.dataset.docId === docId) {
+  function createNavItem(item) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "doc-nav-item";
+
+    if (item.children && item.children.length) {
+      const groupTitle = document.createElement("div");
+      groupTitle.className = "doc-nav-group";
+      groupTitle.textContent = item.title;
+      wrapper.appendChild(groupTitle);
+
+      const subList = document.createElement("div");
+      subList.className = "doc-subnav";
+
+      item.children.forEach(child => {
+        const link = document.createElement("button");
+        link.className = "doc-link";
+        link.textContent = child.title;
+
+        link.addEventListener("click", function () {
+          document.querySelectorAll(".doc-link").forEach(el => el.classList.remove("active"));
+          link.classList.add("active");
+          loadDocument(child);
+        });
+
+        subList.appendChild(link);
+      });
+
+      wrapper.appendChild(subList);
+    } else {
+      const link = document.createElement("button");
+      link.className = "doc-link";
+      link.textContent = item.title;
+
+      link.addEventListener("click", function () {
+        document.querySelectorAll(".doc-link").forEach(el => el.classList.remove("active"));
         link.classList.add("active");
-        expandParents(link);
-      }
-    });
-  }
+        loadDocument(item);
+      });
 
-  function expandParents(element) {
-    let parent = element.parentElement;
-    while (parent && parent !== navContainer) {
-      if (parent.classList.contains("has-children")) {
-        parent.classList.add("open");
-      }
-      parent = parent.parentElement;
+      wrapper.appendChild(link);
     }
+
+    return wrapper;
   }
 
-  function findFirstLeaf(items) {
-    for (const item of items) {
-      if (item.file) return item;
-      if (item.children) {
-        const childLeaf = findFirstLeaf(item.children);
-        if (childLeaf) return childLeaf;
-      }
-    }
-    return null;
-  }
+  NAV_DATA.forEach(item => {
+    navRoot.appendChild(createNavItem(item));
+  });
 
-  function findItemByDocId(items, docId) {
-    for (const item of items) {
-      if (item.docId === docId) return item;
-      if (item.children) {
-        const found = findItemByDocId(item.children, docId);
-        if (found) return found;
-      }
-    }
-    return null;
-  }
-
-  // 渲染导航
-  navContainer.innerHTML = "";
-  navContainer.appendChild(createNavTree(NAV_CONFIG));
-
-  // 根据 URL 参数决定加载哪篇文档
   const params = new URLSearchParams(window.location.search);
-  const currentDocId = params.get("doc");
+  const targetDocId = params.get("doc");
 
-  let targetItem = null;
-  if (currentDocId) {
-    targetItem = findItemByDocId(NAV_CONFIG, currentDocId);
+  let defaultDoc = null;
+  let defaultButton = null;
+
+  function findFirstDoc(items) {
+    for (const item of items) {
+      if (item.children && item.children.length) {
+        return item.children[0];
+      }
+      if (item.file) {
+        return item;
+      }
+    }
+    return null;
   }
 
-  if (!targetItem) {
-    targetItem = findFirstLeaf(NAV_CONFIG);
+  function activateByDocId(items) {
+    const buttons = document.querySelectorAll(".doc-link");
+    let buttonIndex = 0;
+
+    for (const item of items) {
+      if (item.children && item.children.length) {
+        for (const child of item.children) {
+          if (child.docId === targetDocId) {
+            buttons[buttonIndex].classList.add("active");
+            loadDocument(child);
+            return true;
+          }
+          buttonIndex++;
+        }
+      } else if (item.file) {
+        if (item.docId === targetDocId) {
+          buttons[buttonIndex].classList.add("active");
+          loadDocument(item);
+          return true;
+        }
+        buttonIndex++;
+      }
+    }
+
+    return false;
   }
 
-  if (targetItem) {
-    loadMarkdown(targetItem.file, targetItem.docId);
+  if (targetDocId && activateByDocId(NAV_DATA)) {
+    return;
+  }
+
+  defaultDoc = findFirstDoc(NAV_DATA);
+  defaultButton = document.querySelector(".doc-link");
+
+  if (defaultDoc && defaultButton) {
+    defaultButton.classList.add("active");
+    loadDocument(defaultDoc);
   }
 });
