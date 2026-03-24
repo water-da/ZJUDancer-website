@@ -2,12 +2,92 @@ document.addEventListener("DOMContentLoaded", function () {
   const pageType = document.body.dataset.page;
   const navRoot = document.getElementById("doc-nav");
   const contentRoot = document.getElementById("doc-content");
+  const tocRoot = document.getElementById("doc-toc-list");
+  const tocContainer = document.querySelector(".doc-toc");
 
   const NAV_DATA = pageType === "documents" ? DOCUMENTS_NAV : TUTORIALS_NAV;
 
   function getFileType(file) {
     if (!file) return "";
     return file.split(".").pop().toLowerCase();
+  }
+
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\u4e00-\u9fa5\s-]/g, "")
+      .replace(/\s+/g, "-");
+  }
+
+  function assignHeadingIds(root) {
+    const headings = root.querySelectorAll("h1, h2, h3, h4");
+    const usedIds = new Map();
+
+    headings.forEach((heading) => {
+      const rawText = heading.textContent.trim();
+      let baseId = slugify(rawText);
+
+      if (!baseId) {
+        baseId = "section";
+      }
+
+      const count = usedIds.get(baseId) || 0;
+      usedIds.set(baseId, count + 1);
+
+      const finalId = count === 0 ? baseId : `${baseId}-${count}`;
+      heading.id = finalId;
+    });
+  }
+
+  function buildTOC(root) {
+    if (!tocRoot || !tocContainer) return;
+
+    tocRoot.innerHTML = "";
+
+    const headings = root.querySelectorAll("h1, h2, h3, h4");
+
+    if (!headings.length) {
+      tocContainer.style.display = "none";
+      return;
+    }
+
+    tocContainer.style.display = "";
+
+    headings.forEach((heading) => {
+      const level = Number(heading.tagName.charAt(1));
+      const link = document.createElement("a");
+
+      link.href = `#${heading.id}`;
+      link.className = `toc-link toc-level-${level}`;
+      link.textContent = heading.textContent.trim();
+
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const target = document.getElementById(heading.id);
+        if (!target) return;
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        history.replaceState(
+          null,
+          "",
+          `?doc=${encodeURIComponent(new URLSearchParams(window.location.search).get("doc") || "")}#${heading.id}`
+        );
+      });
+
+      tocRoot.appendChild(link);
+    });
+  }
+
+  function hideTOC() {
+    if (!tocContainer) return;
+    tocContainer.style.display = "none";
+    if (tocRoot) tocRoot.innerHTML = "";
   }
 
   async function renderMermaidInContent(root) {
@@ -22,16 +102,30 @@ document.addEventListener("DOMContentLoaded", function () {
       const codeBlock = mermaidBlocks[i];
       const pre = codeBlock.parentElement;
       const graphDefinition = codeBlock.textContent.trim();
-
-      const container = document.createElement("div");
-      container.className = "mermaid-chart";
-
       const renderId = `mermaid-${Date.now()}-${i}`;
 
       try {
         const { svg } = await window.mermaid.render(renderId, graphDefinition);
-        container.innerHTML = svg;
-        pre.replaceWith(container);
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "mermaid-wrapper";
+
+        wrapper.innerHTML = `
+          <div class="mermaid-toolbar">
+            <button type="button" class="mermaid-zoom-btn" data-action="zoom-in">＋</button>
+            <button type="button" class="mermaid-zoom-btn" data-action="zoom-out">－</button>
+            <button type="button" class="mermaid-zoom-btn" data-action="reset">重置</button>
+          </div>
+          <div class="mermaid-viewport">
+            <div class="mermaid-stage">
+              ${svg}
+            </div>
+          </div>
+        `;
+
+        pre.replaceWith(wrapper);
+
+        setupMermaidZoom(wrapper);
       } catch (error) {
         console.error("Mermaid render error:", error);
 
@@ -57,13 +151,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const text = await response.text();
       contentRoot.innerHTML = marked.parse(text);
 
+      assignHeadingIds(contentRoot);
       await renderMermaidInContent(contentRoot);
+      buildTOC(contentRoot);
     } catch (error) {
       contentRoot.innerHTML = `<p>Failed to load document: ${error.message}</p>`;
+      hideTOC();
     }
   }
 
   function renderPDF(file) {
+    hideTOC();
+
     contentRoot.className = "doc-content";
     contentRoot.innerHTML = `
       <div class="doc-toolbar">
@@ -84,6 +183,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (type === "pdf") {
       renderPDF(item.file);
     } else {
+      hideTOC();
+
       contentRoot.className = "doc-content";
       contentRoot.innerHTML = `
         <div class="doc-toolbar">
@@ -229,3 +330,50 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+function setupMermaidZoom(wrapper) {
+  const stage = wrapper.querySelector(".mermaid-stage");
+  const zoomInBtn = wrapper.querySelector('[data-action="zoom-in"]');
+  const zoomOutBtn = wrapper.querySelector('[data-action="zoom-out"]');
+  const resetBtn = wrapper.querySelector('[data-action="reset"]');
+
+  let scale = 1;
+
+  function applyTransform() {
+    stage.style.transform = `scale(${scale})`;
+  }
+
+  zoomInBtn.addEventListener("click", () => {
+    scale = Math.min(scale + 0.1, 3);
+    applyTransform();
+  });
+
+  zoomOutBtn.addEventListener("click", () => {
+    scale = Math.max(scale - 0.1, 0.4);
+    applyTransform();
+  });
+
+  resetBtn.addEventListener("click", () => {
+    scale = 1;
+    applyTransform();
+  });
+
+  const viewport = wrapper.querySelector(".mermaid-viewport");
+  viewport.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+
+      if (e.deltaY < 0) {
+        scale = Math.min(scale + 0.1, 3);
+      } else {
+        scale = Math.max(scale - 0.1, 0.4);
+      }
+
+      applyTransform();
+    },
+    { passive: false }
+  );
+
+  applyTransform();
+}

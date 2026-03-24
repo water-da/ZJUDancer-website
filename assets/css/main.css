@@ -3953,3 +3953,53 @@ input, select, textarea {
 	max-width: 260px;
 	opacity: 1;
 }
+.mermaid-wrapper {
+  margin: 1rem 0 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.mermaid-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.mermaid-zoom-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mermaid-zoom-btn:hover {
+  background: #eef2ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.mermaid-viewport {
+  overflow: auto;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.mermaid-stage {
+  transform-origin: top left;
+  transition: transform 0.15s ease;
+  width: max-content;
+}
+
+.mermaid-stage svg {
+  display: block;
+  max-width: none;
+  height: auto;
+}

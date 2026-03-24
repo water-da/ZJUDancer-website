@@ -504,3 +504,57 @@
   color: #374151;
   padding-left: 1rem;
 }
+.doc-toc {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.doc-toc-inner {
+  padding: 1rem 0.75rem;
+  border-left: 1px solid #e5e7eb;
+}
+
+.doc-toc-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #374151;
+}
+
+#doc-toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.toc-link {
+  display: block;
+  text-decoration: none;
+  color: #6b7280;
+  line-height: 1.45;
+  font-size: 0.88rem;
+}
+
+.toc-link:hover {
+  color: #111827;
+}
+
+.toc-level-1 {
+  font-weight: 700;
+}
+
+.toc-level-2 {
+  padding-left: 0.6rem;
+}
+
+.toc-level-3 {
+  padding-left: 1.2rem;
+  font-size: 0.84rem;
+}
+
+.toc-level-4 {
+  padding-left: 1.8rem;
+  font-size: 0.82rem;
+  color: #9ca3af;
+}
