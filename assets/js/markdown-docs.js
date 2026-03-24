@@ -16,9 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch(file)
       .then(response => {
-        if (!response.ok) {
-          throw new Error("Failed to load markdown");
-        }
+        if (!response.ok) throw new Error("Failed to load markdown");
         return response.text();
       })
       .then(text => {
@@ -41,11 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function loadDocument(item) {
-    if (!item.file) {
-      contentRoot.className = "doc-content";
-      contentRoot.innerHTML = "<p>No file found.</p>";
-      return;
-    }
+    if (!item || !item.file) return;
 
     const type = getFileType(item.file);
 
@@ -69,40 +63,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function collapseAllGroups() {
-    document.querySelectorAll(".doc-subnav").forEach(el => {
-      el.classList.remove("open");
-    });
-    document.querySelectorAll(".doc-nav-toggle").forEach(el => {
-      el.classList.remove("open");
+  function closeAllLinks() {
+    document.querySelectorAll(".doc-link").forEach(el => {
+      el.classList.remove("active");
     });
   }
 
-  function expandGroup(toggleBtn, subList) {
-    if (toggleBtn && subList) {
-      toggleBtn.classList.add("open");
-      subList.classList.add("open");
+  function openAncestorGroups(element) {
+    let current = element.parentElement;
+    while (current) {
+      if (current.classList.contains("doc-subnav")) {
+        current.classList.add("open");
+      }
+
+      if (current.classList.contains("doc-nav-item")) {
+        const toggle = current.querySelector(":scope > .doc-nav-toggle");
+        if (toggle) toggle.classList.add("open");
+      }
+
+      current = current.parentElement;
     }
   }
 
   function activateLink(link, item) {
-    document.querySelectorAll(".doc-link").forEach(el => el.classList.remove("active"));
+    closeAllLinks();
     link.classList.add("active");
     loadDocument(item);
-
-    const parentSubnav = link.closest(".doc-subnav");
-    if (parentSubnav) {
-      const parentWrapper = parentSubnav.closest(".doc-nav-item");
-      const toggleBtn = parentWrapper ? parentWrapper.querySelector(".doc-nav-toggle") : null;
-      expandGroup(toggleBtn, parentSubnav);
-    }
+    openAncestorGroups(link);
   }
 
-  function createNavItem(item) {
+  function createNavNode(item, level = 0) {
     const wrapper = document.createElement("div");
-    wrapper.className = "doc-nav-item";
+    wrapper.className = `doc-nav-item level-${level}`;
 
-    if (item.children && item.children.length) {
+    if (item.children && item.children.length > 0) {
       const toggle = document.createElement("button");
       toggle.className = "doc-nav-toggle";
       toggle.type = "button";
@@ -112,20 +106,11 @@ document.addEventListener("DOMContentLoaded", function () {
       subList.className = "doc-subnav";
 
       item.children.forEach(child => {
-        const link = document.createElement("button");
-        link.className = "doc-link";
-        link.type = "button";
-        link.textContent = child.title;
-        link.dataset.docId = child.docId || "";
-
-        link.addEventListener("click", function () {
-          activateLink(link, child);
-        });
-
-        subList.appendChild(link);
+        subList.appendChild(createNavNode(child, level + 1));
       });
 
-      toggle.addEventListener("click", function () {
+      toggle.addEventListener("click", function (e) {
+        e.stopPropagation();
         const isOpen = subList.classList.contains("open");
         subList.classList.toggle("open", !isOpen);
         toggle.classList.toggle("open", !isOpen);
@@ -133,14 +118,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       wrapper.appendChild(toggle);
       wrapper.appendChild(subList);
-    } else {
+    } else if (item.file) {
       const link = document.createElement("button");
       link.className = "doc-link";
       link.type = "button";
       link.textContent = item.title;
       link.dataset.docId = item.docId || "";
 
-      link.addEventListener("click", function () {
+      link.addEventListener("click", function (e) {
+        e.stopPropagation();
         activateLink(link, item);
       });
 
@@ -150,77 +136,60 @@ document.addEventListener("DOMContentLoaded", function () {
     return wrapper;
   }
 
-  NAV_DATA.forEach(item => {
-    navRoot.appendChild(createNavItem(item));
-  });
-
-  const params = new URLSearchParams(window.location.search);
-  const targetDocId = params.get("doc");
-
   function findFirstDoc(items) {
     for (const item of items) {
-      if (item.children && item.children.length) {
-        return item.children[0];
-      }
-      if (item.file) {
+      if (item.children && item.children.length > 0) {
+        const found = findFirstDoc(item.children);
+        if (found) return found;
+      } else if (item.file) {
         return item;
       }
     }
     return null;
   }
 
-  function activateByDocId(items) {
-    const buttons = document.querySelectorAll(".doc-link");
-
-    let buttonIndex = 0;
+  function findItemByDocId(items, docId) {
     for (const item of items) {
-      if (item.children && item.children.length) {
-        for (const child of item.children) {
-          if (child.docId === targetDocId) {
-            const btn = buttons[buttonIndex];
-            if (btn) {
-              btn.classList.add("active");
-              loadDocument(child);
-
-              const subnav = btn.closest(".doc-subnav");
-              const wrapper = btn.closest(".doc-nav-item");
-              const toggle = wrapper ? wrapper.querySelector(".doc-nav-toggle") : null;
-              expandGroup(toggle, subnav);
-            }
-            return true;
-          }
-          buttonIndex++;
-        }
-      } else if (item.file) {
-        if (item.docId === targetDocId) {
-          const btn = buttons[buttonIndex];
-          if (btn) {
-            btn.classList.add("active");
-            loadDocument(item);
-          }
-          return true;
-        }
-        buttonIndex++;
+      if (item.children && item.children.length > 0) {
+        const found = findItemByDocId(item.children, docId);
+        if (found) return found;
+      } else if (item.docId === docId) {
+        return item;
       }
     }
-
-    return false;
+    return null;
   }
 
-  if (targetDocId && activateByDocId(NAV_DATA)) {
-    return;
+  function findLinkByDocId(docId) {
+    return document.querySelector(`.doc-link[data-doc-id="${docId}"]`);
+  }
+
+  NAV_DATA.forEach(item => {
+    navRoot.appendChild(createNavNode(item, 0));
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const targetDocId = params.get("doc");
+
+  if (targetDocId) {
+    const targetItem = findItemByDocId(NAV_DATA, targetDocId);
+    const targetLink = findLinkByDocId(targetDocId);
+
+    if (targetItem && targetLink) {
+      targetLink.classList.add("active");
+      loadDocument(targetItem);
+      openAncestorGroups(targetLink);
+      return;
+    }
   }
 
   const defaultDoc = findFirstDoc(NAV_DATA);
-  const defaultButton = document.querySelector(".doc-link");
-
-  if (defaultDoc && defaultButton) {
-    defaultButton.classList.add("active");
-    loadDocument(defaultDoc);
-
-    const subnav = defaultButton.closest(".doc-subnav");
-    const wrapper = defaultButton.closest(".doc-nav-item");
-    const toggle = wrapper ? wrapper.querySelector(".doc-nav-toggle") : null;
-    expandGroup(toggle, subnav);
+  if (defaultDoc) {
+    const defaultLink = findLinkByDocId(defaultDoc.docId);
+    if (defaultLink) {
+      defaultLink.classList.add("active");
+      loadDocument(defaultDoc);
+      openAncestorGroups(defaultLink);
+    }
   }
 });
