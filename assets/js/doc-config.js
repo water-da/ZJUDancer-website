@@ -24,6 +24,11 @@ const DOCUMENTS_NAV = [
             title: "第二版",
             file: "docs/documents/behavior_module_v2.pdf",
             docId: "behavior-module-v2"
+          },
+          {
+            title: "第三版",
+            file: "docs/documents/Behavior_module.md",
+            docId: "behavior-module-v3"
           }
         ]
       },
@@ -48,7 +53,11 @@ const DOCUMENTS_NAV = [
         file: "docs/documents/planner_module.pdf",
         docId: "planner-module-overview"
       },
-      
+      {
+        title: "Planner Module ",
+        file: "docs/documents/Planner_module.md",
+        docId: "planner-module-overview"
+      }
     ]
   },
     {
