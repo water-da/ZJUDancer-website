@@ -531,30 +531,72 @@
 .toc-link {
   display: block;
   text-decoration: none;
-  color: #6b7280;
-  line-height: 1.45;
-  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0.1rem 0;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+  padding: 0.18rem 0 0.18rem 0.55rem;
 }
 
+/* 一级标题 */
+.toc-level-1 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1f2937;
+  padding-left: 0.2rem;
+  margin-top: 0.45rem;
+}
+
+/* 二级标题 */
+.toc-level-2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  padding-left: 0.85rem;
+}
+
+/* 三级标题 */
+.toc-level-3 {
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: #6b7280;
+  padding-left: 1.55rem;
+}
+
+/* 四级标题 */
+.toc-level-4 {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #9ca3af;
+  padding-left: 2.2rem;
+}
+
+/* hover 效果 */
 .toc-link:hover {
   color: #111827;
+  background: rgba(74, 202, 168, 0.08);
+  border-left-color: #4acaa8;
+  border-radius: 6px;
+}
+.toc-level-1:not(:first-child) {
+  margin-top: 0.7rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid #eef2f7;
+}
+.doc-toc-inner {
+  padding: 1rem 0.85rem;
+  border-left: 1px solid #e5e7eb;
 }
 
-.toc-level-1 {
+#doc-toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+.toc-link.active {
+  color: #0f766e;
+  background: rgba(74, 202, 168, 0.12);
+  border-left-color: #4acaa8;
   font-weight: 700;
-}
-
-.toc-level-2 {
-  padding-left: 0.6rem;
-}
-
-.toc-level-3 {
-  padding-left: 1.2rem;
-  font-size: 0.84rem;
-}
-
-.toc-level-4 {
-  padding-left: 1.8rem;
-  font-size: 0.82rem;
-  color: #9ca3af;
+  border-radius: 6px;
 }
