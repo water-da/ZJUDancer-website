@@ -61,7 +61,7 @@ const DOCUMENTS_NAV = [
     children: [
       {
         title: "Vision",
-        file: "docs/documents/Vision_module.pdf",
+        file: "docs/documents/Vision_module.md",
         docId: "vision-module-overview"
       },
       
