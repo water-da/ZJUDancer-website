@@ -10,21 +10,57 @@ document.addEventListener("DOMContentLoaded", function () {
     return file.split(".").pop().toLowerCase();
   }
 
-  function renderMarkdown(file) {
+  async function renderMermaidInContent(root) {
+    if (!window.mermaid) {
+      console.warn("Mermaid is not loaded.");
+      return;
+    }
+
+    const mermaidBlocks = root.querySelectorAll("pre code.language-mermaid");
+
+    for (let i = 0; i < mermaidBlocks.length; i++) {
+      const codeBlock = mermaidBlocks[i];
+      const pre = codeBlock.parentElement;
+      const graphDefinition = codeBlock.textContent.trim();
+
+      const container = document.createElement("div");
+      container.className = "mermaid-chart";
+
+      const renderId = `mermaid-${Date.now()}-${i}`;
+
+      try {
+        const { svg } = await window.mermaid.render(renderId, graphDefinition);
+        container.innerHTML = svg;
+        pre.replaceWith(container);
+      } catch (error) {
+        console.error("Mermaid render error:", error);
+
+        const errorBox = document.createElement("div");
+        errorBox.className = "mermaid-error";
+        errorBox.innerHTML = `
+          <p><strong>Mermaid 渲染失败</strong></p>
+          <pre>${graphDefinition}</pre>
+        `;
+        pre.replaceWith(errorBox);
+      }
+    }
+  }
+
+  async function renderMarkdown(file) {
     contentRoot.className = "doc-content markdown-body";
     contentRoot.innerHTML = "<p>Loading markdown...</p>";
 
-    fetch(file)
-      .then(response => {
-        if (!response.ok) throw new Error("Failed to load markdown");
-        return response.text();
-      })
-      .then(text => {
-        contentRoot.innerHTML = marked.parse(text);
-      })
-      .catch(error => {
-        contentRoot.innerHTML = `<p>Failed to load document: ${error.message}</p>`;
-      });
+    try {
+      const response = await fetch(file);
+      if (!response.ok) throw new Error("Failed to load markdown");
+
+      const text = await response.text();
+      contentRoot.innerHTML = marked.parse(text);
+
+      await renderMermaidInContent(contentRoot);
+    } catch (error) {
+      contentRoot.innerHTML = `<p>Failed to load document: ${error.message}</p>`;
+    }
   }
 
   function renderPDF(file) {
