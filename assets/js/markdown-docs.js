@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const tocContainer = document.querySelector(".doc-toc");
 
   const NAV_DATA = pageType === "documents" ? DOCUMENTS_NAV : TUTORIALS_NAV;
+  const viewerInstance = initImageViewer();
 
   function getFileType(file) {
     if (!file) return "";
@@ -111,21 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper.className = "mermaid-wrapper";
 
         wrapper.innerHTML = `
-          <div class="mermaid-toolbar">
-            <button type="button" class="mermaid-zoom-btn" data-action="zoom-in">＋</button>
-            <button type="button" class="mermaid-zoom-btn" data-action="zoom-out">－</button>
-            <button type="button" class="mermaid-zoom-btn" data-action="reset">重置</button>
-          </div>
-          <div class="mermaid-viewport">
-            <div class="mermaid-stage">
-              ${svg}
-            </div>
+          <div class="mermaid-preview">
+            ${svg}
           </div>
         `;
 
+
         pre.replaceWith(wrapper);
 
-        setupMermaidZoom(wrapper);
       } catch (error) {
         console.error("Mermaid render error:", error);
 
@@ -154,6 +148,8 @@ document.addEventListener("DOMContentLoaded", function () {
       assignHeadingIds(contentRoot);
       await renderMermaidInContent(contentRoot);
       buildTOC(contentRoot);
+      bindZoomableMedia(contentRoot, viewerInstance);
+
     } catch (error) {
       contentRoot.innerHTML = `<p>Failed to load document: ${error.message}</p>`;
       hideTOC();
@@ -330,6 +326,151 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+function initImageViewer() {
+  const viewer = document.getElementById("image-viewer");
+  if (!viewer) return null;
+
+  const backdrop = viewer.querySelector(".image-viewer-backdrop");
+  const stageWrap = viewer.querySelector(".image-viewer-stage-wrap");
+  const stage = viewer.querySelector(".image-viewer-stage");
+  const zoomInBtn = viewer.querySelector('[data-action="zoom-in"]');
+  const zoomOutBtn = viewer.querySelector('[data-action="zoom-out"]');
+  const resetBtn = viewer.querySelector('[data-action="reset"]');
+  const closeBtn = viewer.querySelector('[data-action="close"]');
+
+  let scale = 1;
+  let translateX = 0;
+  let translateY = 0;
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let activeNode = null;
+
+  function applyTransform() {
+    stage.style.transform = `translate(-50%, -50%) translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  }
+
+  function resetTransform() {
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    applyTransform();
+  }
+
+  function open(node) {
+    stage.innerHTML = "";
+    const clone = node.cloneNode(true);
+
+    if (clone.tagName && clone.tagName.toLowerCase() === "img") {
+      clone.removeAttribute("width");
+      clone.removeAttribute("height");
+    }
+
+    stage.appendChild(clone);
+    activeNode = clone;
+    viewer.classList.add("open");
+    viewer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    resetTransform();
+  }
+
+  function close() {
+    viewer.classList.remove("open");
+    viewer.setAttribute("aria-hidden", "true");
+    stage.innerHTML = "";
+    document.body.style.overflow = "";
+    activeNode = null;
+  }
+
+  zoomInBtn.addEventListener("click", () => {
+    scale = Math.min(scale + 0.1, 5);
+    applyTransform();
+  });
+
+  zoomOutBtn.addEventListener("click", () => {
+    scale = Math.max(scale - 0.1, 0.2);
+    applyTransform();
+  });
+
+  resetBtn.addEventListener("click", () => {
+    resetTransform();
+  });
+
+  closeBtn.addEventListener("click", close);
+  backdrop.addEventListener("click", close);
+
+  stageWrap.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+
+      if (e.deltaY < 0) {
+        scale = Math.min(scale + 0.1, 5);
+      } else {
+        scale = Math.max(scale - 0.1, 0.2);
+      }
+
+      applyTransform();
+    },
+    { passive: false }
+  );
+
+  stageWrap.addEventListener("mousedown", (e) => {
+    if (!activeNode) return;
+    isDragging = true;
+    startX = e.clientX - translateX;
+    startY = e.clientY - translateY;
+    stageWrap.classList.add("dragging");
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    translateX = e.clientX - startX;
+    translateY = e.clientY - startY;
+    applyTransform();
+  });
+
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+    stageWrap.classList.remove("dragging");
+  });
+
+  viewer.addEventListener("dblclick", () => {
+    resetTransform();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (!viewer.classList.contains("open")) return;
+
+    if (e.key === "Escape") {
+      close();
+    }
+  });
+
+  return { open, close };
+}
+
+function bindZoomableMedia(root, viewerInstance) {
+  if (!root || !viewerInstance) return;
+
+  const images = root.querySelectorAll("img");
+  images.forEach((img) => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => {
+      viewerInstance.open(img);
+    });
+  });
+
+  const mermaidSvgs = root.querySelectorAll(".mermaid-wrapper svg");
+  mermaidSvgs.forEach((svg) => {
+    svg.style.cursor = "zoom-in";
+    svg.addEventListener("click", () => {
+      viewerInstance.open(svg);
+    });
+  });
+}
+
 
 function setupMermaidZoom(wrapper) {
   const stage = wrapper.querySelector(".mermaid-stage");

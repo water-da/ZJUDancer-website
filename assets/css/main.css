@@ -4003,3 +4003,99 @@ input, select, textarea {
   max-width: none;
   height: auto;
 }
+.image-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+
+.image-viewer.open {
+  display: block;
+}
+
+.image-viewer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(2px);
+}
+
+.image-viewer-toolbar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.viewer-btn {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.viewer-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.image-viewer-stage-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.image-viewer-stage-wrap.dragging {
+  cursor: grabbing;
+}
+
+.image-viewer-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.image-viewer-stage img,
+.image-viewer-stage svg {
+  display: block;
+  max-width: none;
+  max-height: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.markdown-body img,
+.mermaid-wrapper svg {
+  cursor: zoom-in;
+}
+.mermaid-wrapper {
+  margin: 1rem 0 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.mermaid-preview {
+  padding: 1rem;
+  overflow: auto;
+}
+
+.mermaid-preview svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  cursor: zoom-in;
+}
