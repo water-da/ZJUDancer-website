@@ -27,7 +27,7 @@ const DOCUMENTS_NAV = [
           },
           {
             title: "第三版",
-            file: "docs/documents/Behavior_module.md",
+            file: "docs/documents/Behavior_module_new.md",
             docId: "behavior-module-v3"
           }
         ]
