@@ -17,17 +17,12 @@ const DOCUMENTS_NAV = [
         children: [
           {
             title: "第一版",
-            file: "docs/documents/Behavior_module.pdf",
+            file: "docs/documents/Behavior_module_new.md",
             docId: "behavior-module-v1"
           },
           {
             title: "第二版",
-            file: "docs/documents/behavior_module_v2.pdf",
-            docId: "behavior-module-v2"
-          },
-          {
-            title: "第三版",
-            file: "docs/documents/Behavior_module_new.md",
+            file: "docs/documents/Behavior_module.md",
             docId: "behavior-module-v3"
           }
         ]
@@ -41,7 +36,8 @@ const DOCUMENTS_NAV = [
             docId: "network-module"
           }
         ]
-      }
+      },
+
     ]
   },
 
@@ -49,12 +45,12 @@ const DOCUMENTS_NAV = [
     title: "步态代码阅读",
     children: [
       {
-        title: "Planner Module ",
+        title: "Planner",
         file: "docs/documents/planner_module.pdf",
         docId: "planner-module-overview"
       },
       {
-        title: "Planner Module ",
+        title: "Planner",
         file: "docs/documents/Planner_module.md",
         docId: "planner-module-overview"
       }
@@ -64,11 +60,33 @@ const DOCUMENTS_NAV = [
     title: "视觉代码阅读",
     children: [
       {
-        
+        title: "Vision",
+        file: "docs/documents/Vision_module.pdf",
+        docId: "vision-module-overview"
       },
       
     ]
   },
+  {
+    title: "其他代码阅读",
+    children: [
+      {
+        title: "IO",
+        file: "docs/documents/IO_module.md",
+        docId: "other-module-overview"
+      },
+      {
+        title: "Config",
+        file: "docs/documents/Config_module.md",
+        docId: "config-module-overview"
+      },
+      {
+        title: "Launch",
+        file: "docs/documents/Launch_module.md",
+        docId: "launch-module-overview"
+      }
+    ]
+  }
 ];
 
 const TUTORIALS_NAV = [
