@@ -16,11 +16,6 @@ const DOCUMENTS_NAV = [
         title: "Behavior",
         children: [
           {
-            title: "第一版",
-            file: "docs/documents/Behavior_module_new.md",
-            docId: "behavior-module-v1"
-          },
-          {
             title: "第二版",
             file: "docs/documents/Behavior_module.md",
             docId: "behavior-module-v3"
@@ -32,7 +27,7 @@ const DOCUMENTS_NAV = [
         children: [
           {
             title: "Network Module",
-            file: "docs/documents/Network_module.pdf",
+            file: "docs/documents/Network_module.md",
             docId: "network-module"
           }
         ]
@@ -46,11 +41,6 @@ const DOCUMENTS_NAV = [
     children: [
       {
         title: "Planner",
-        file: "docs/documents/planner_module.pdf",
-        docId: "planner-module-overview"
-      },
-      {
-        title: "Planner",
         file: "docs/documents/Planner_module.md",
         docId: "planner-module-overview"
       }
@@ -60,11 +50,15 @@ const DOCUMENTS_NAV = [
     title: "视觉代码阅读",
     children: [
       {
-        title: "Vision",
+        title: "Vision1",
         file: "docs/documents/Vision_module.md",
         docId: "vision-module-overview"
       },
-      
+      {
+        title: "Vision2",
+        file: "docs/documents/dvision 代码解读.md",
+        docId: "vision-module-overview2"
+      },
     ]
   },
   {
@@ -86,6 +80,10 @@ const DOCUMENTS_NAV = [
         docId: "launch-module-overview"
       }
     ]
+  },
+  {
+    title: "文档下载",
+    
   }
 ];
 

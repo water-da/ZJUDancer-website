@@ -600,3 +600,47 @@
   font-weight: 700;
   border-radius: 6px;
 }
+.toc-group {
+  margin-bottom: 0.35rem;
+}
+
+.toc-group-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.toc-group-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.toc-group-arrow {
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+}
+
+.toc-group.open .toc-group-arrow {
+  transform: rotate(0deg);
+}
+
+.toc-group:not(.open) .toc-group-arrow {
+  transform: rotate(-90deg);
+}
+
+.toc-group-children {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.25s ease;
+}
+
+.toc-group:not(.open) .toc-group-children {
+  max-height: 0;
+}

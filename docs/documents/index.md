@@ -10,21 +10,9 @@
 - 策略模块代码
 - 步态模块代码
 - 视觉模块代码
+- 其他模块代码
+- 代码下载界面
+
+PS：左侧导航栏选择文件，右侧导航栏显示文件内部小标题，点击可跳转。
 
 
-## Quick Notes
-
-这里是一段测试文本，用来检查中文显示是否正常。  
-This is a simple test paragraph for English rendering.
-
-### Markdown Features Test
-
-- **Bold text**
-- *Italic text*
-- `inline code`
-
-### Code Block Test
-
-```python
-def hello():
-    print("Hello from ZJUDancer docs!")

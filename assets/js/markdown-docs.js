@@ -41,27 +41,67 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function buildTOC(root) {
-    if (!tocRoot || !tocContainer) return;
+function buildTOC(root) {
+  if (!tocRoot || !tocContainer) return;
 
-    tocRoot.innerHTML = "";
+  tocRoot.innerHTML = "";
 
-    const headings = root.querySelectorAll("h1, h2, h3, h4");
+  const headings = Array.from(root.querySelectorAll("h1, h2, h3, h4"));
 
-    if (!headings.length) {
-      tocContainer.style.display = "none";
-      return;
-    }
+  if (!headings.length) {
+    tocContainer.style.display = "none";
+    return;
+  }
 
-    tocContainer.style.display = "";
+  tocContainer.style.display = "";
 
-    headings.forEach((heading) => {
-      const level = Number(heading.tagName.charAt(1));
+  let currentGroup = null;
+  let currentChildren = null;
+
+  headings.forEach((heading, index) => {
+    const level = Number(heading.tagName.charAt(1));
+    const text = heading.textContent.trim();
+
+    if (level === 1) {
+      const group = document.createElement("div");
+      group.className = "toc-group open";
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "toc-group-toggle toc-link toc-level-1";
+      toggle.setAttribute("aria-expanded", "true");
+
+      const label = document.createElement("span");
+      label.className = "toc-group-label";
+      label.textContent = text;
+
+      const arrow = document.createElement("span");
+      arrow.className = "toc-group-arrow";
+      arrow.textContent = "▾";
+
+      toggle.appendChild(label);
+      toggle.appendChild(arrow);
+
+      const children = document.createElement("div");
+      children.className = "toc-group-children";
+
+      toggle.addEventListener("click", function () {
+        const isOpen = group.classList.contains("open");
+        group.classList.toggle("open", !isOpen);
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+      });
+
+      group.appendChild(toggle);
+      group.appendChild(children);
+      tocRoot.appendChild(group);
+
+      currentGroup = group;
+      currentChildren = children;
+    } else {
       const link = document.createElement("a");
-
       link.href = `#${heading.id}`;
       link.className = `toc-link toc-level-${level}`;
-      link.textContent = heading.textContent.trim();
+      link.textContent = text;
 
       link.addEventListener("click", function (e) {
         e.preventDefault();
@@ -74,16 +114,24 @@ document.addEventListener("DOMContentLoaded", function () {
           block: "start"
         });
 
-        history.replaceState(
-          null,
-          "",
-          `?doc=${encodeURIComponent(new URLSearchParams(window.location.search).get("doc") || "")}#${heading.id}`
-        );
+        const currentDocId = new URLSearchParams(window.location.search).get("doc");
+        const url = currentDocId
+          ? `?doc=${encodeURIComponent(currentDocId)}#${heading.id}`
+          : `#${heading.id}`;
+
+        history.replaceState(null, "", url);
       });
 
-      tocRoot.appendChild(link);
-    });
-  }
+      if (currentChildren) {
+        currentChildren.appendChild(link);
+      } else {
+        // 如果文档一开始没有 h1，就直接放根节点，避免丢失
+        tocRoot.appendChild(link);
+      }
+    }
+  });
+}
+
 
   function hideTOC() {
     if (!tocContainer) return;
