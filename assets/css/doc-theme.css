@@ -898,3 +898,11 @@
   border-radius: 999px;
   background: #2563eb;
 }
+.sidebar-right {
+  font-size: 13px;
+}
+
+.sidebar-right .toc-link {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}

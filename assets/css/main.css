@@ -4099,3 +4099,59 @@ input, select, textarea {
   margin: 0 auto;
   cursor: zoom-in;
 }
+.main-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 210px;
+  gap: 24px;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.sidebar-left {
+  min-width: 0;
+}
+
+.content-main {
+  min-width: 0;
+}
+
+.content-main .doc-content {
+  max-width: 860px;
+}
+
+.sidebar-right {
+  min-width: 0;
+}
+@media (max-width: 1200px) {
+  .main-layout {
+    grid-template-columns: 220px minmax(0, 1fr) 190px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .sidebar-right {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
+  }
+
+  .content-main .doc-content {
+    max-width: 100%;
+  }
+}
