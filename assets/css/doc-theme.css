@@ -741,3 +741,160 @@
   color: #9ca3af;
   padding-left: 2.15rem;
 }
+/* TOC 根容器 */
+#toc-root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.25rem 0;
+}
+
+/* 每个节点 */
+.toc-item {
+  display: block;
+}
+
+/* 可折叠标题行 */
+.toc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  min-height: 2rem;
+}
+
+/* 链接基础样式 */
+.toc-link {
+  flex: 1;
+  min-width: 0;
+  display: block;
+  text-decoration: none;
+  line-height: 1.5;
+  padding: 0.28rem 0.4rem;
+  color: #334155;
+  border-radius: 0;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+/* hover 轻量，不做大块背景 */
+.toc-link:hover {
+  color: #2563eb;
+}
+
+/* 折叠箭头：彻底去塑料按钮感 */
+.toc-toggle {
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.15rem;
+  border: none;
+  background: transparent;
+  color: #374151;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.toc-toggle:hover {
+  color: #2563eb;
+}
+
+.toc-collapsible.open > .toc-row .toc-toggle {
+  transform: rotate(0deg);
+}
+
+.toc-collapsible:not(.open) > .toc-row .toc-toggle {
+  transform: rotate(-90deg);
+}
+
+/* 子级容器：不要大盒子感，只保留结构缩进 */
+.toc-children {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.25s ease;
+}
+
+.toc-collapsible:not(.open) > .toc-children {
+  max-height: 0;
+}
+
+/* ===== 层级缩进与字体 ===== */
+
+/* h1：章节级 */
+.toc-level-1 > .toc-link,
+.toc-level-1 > .toc-row > .toc-link {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #2563eb;
+  padding-left: 0.75rem;
+  margin-top: 0.45rem;
+  position: relative;
+}
+
+/* h1 左侧强调线 */
+.toc-level-1 > .toc-link::before,
+.toc-level-1 > .toc-row > .toc-link::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.22rem;
+  bottom: 0.22rem;
+  width: 3px;
+  border-radius: 999px;
+  background: #2563eb;
+}
+
+/* h2 */
+.toc-level-2 > .toc-link,
+.toc-level-2 > .toc-row > .toc-link {
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: #334155;
+  padding-left: 1.7rem;
+}
+
+/* h3 */
+.toc-level-3 > .toc-link,
+.toc-level-3 > .toc-row > .toc-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #475569;
+  padding-left: 3rem;
+}
+
+/* h4 */
+.toc-level-4 > .toc-link,
+.toc-level-4 > .toc-row > .toc-link {
+  font-size: 0.87rem;
+  font-weight: 400;
+  color: #64748b;
+  padding-left: 4.2rem;
+}
+
+/* 当前项高亮：参考图那种左线 + 强调色 */
+.toc-link.active {
+  color: #2563eb;
+  font-weight: 700;
+  position: relative;
+}
+
+.toc-level-2 > .toc-link.active::before,
+.toc-level-2 > .toc-row > .toc-link.active::before,
+.toc-level-3 > .toc-link.active::before,
+.toc-level-3 > .toc-row > .toc-link.active::before,
+.toc-level-4 > .toc-link.active::before,
+.toc-level-4 > .toc-row > .toc-link.active::before {
+  content: "";
+  position: absolute;
+  left: calc(100% - 100%);
+  top: 0.24rem;
+  bottom: 0.24rem;
+  width: 3px;
+  border-radius: 999px;
+  background: #2563eb;
+}
