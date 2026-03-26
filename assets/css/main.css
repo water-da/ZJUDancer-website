@@ -4174,3 +4174,11 @@ input, select, textarea {
   display: block;
   object-fit: cover;
 }
+.footer-bilibili-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
