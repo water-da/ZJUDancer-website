@@ -257,8 +257,8 @@
 }
 
 .doc-sidebar {
-  width: 280px;
-  min-width: 240px;
+  width: 200px;
+  min-width: 160px;
   flex-shrink: 0;
   text-align: left;
 }
@@ -297,7 +297,7 @@
   border-radius: 8px;
 }
 .doc-sidebar {
-  width: 300px;
+  width: 200px;
   flex-shrink: 0;
   background: #f8f9fb;
   border-right: 1px solid #e5e7eb;
