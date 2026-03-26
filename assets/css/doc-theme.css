@@ -315,9 +315,9 @@
 ========================= */
 
 .doc-toc {
-  flex: 0 0 200px;
-  width: 200px;
-  min-width: 200px;
+  flex: 0 0 240px;
+  width: 240px;
+  min-width: 240px;
   flex-shrink: 0;
   position: sticky;
   top: 2rem;
