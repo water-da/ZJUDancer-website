@@ -55,81 +55,116 @@ function buildTOC(root) {
 
   tocContainer.style.display = "";
 
-  let currentGroup = null;
-  let currentChildren = null;
+  const nodes = headings.map((heading) => ({
+    id: heading.id,
+    text: heading.textContent.trim(),
+    level: Number(heading.tagName.charAt(1)),
+    children: []
+  }));
 
-  headings.forEach((heading, index) => {
-    const level = Number(heading.tagName.charAt(1));
-    const text = heading.textContent.trim();
+  const tree = [];
+  const stack = [];
 
-    if (level === 1) {
-      const group = document.createElement("div");
-      group.className = "toc-group open";
+  nodes.forEach((node) => {
+    while (stack.length && stack[stack.length - 1].level >= node.level) {
+      stack.pop();
+    }
 
-      const toggle = document.createElement("button");
-      toggle.type = "button";
-      toggle.className = "toc-group-toggle toc-link toc-level-1";
-      toggle.setAttribute("aria-expanded", "true");
+    if (stack.length) {
+      stack[stack.length - 1].children.push(node);
+    } else {
+      tree.push(node);
+    }
 
-      const label = document.createElement("span");
-      label.className = "toc-group-label";
-      label.textContent = text;
+    stack.push(node);
+  });
 
-      const arrow = document.createElement("span");
-      arrow.className = "toc-group-arrow";
-      arrow.textContent = "▾";
+  const currentDocId = new URLSearchParams(window.location.search).get("doc");
 
-      toggle.appendChild(label);
-      toggle.appendChild(arrow);
+  function createScrollHandler(id) {
+    return function (e) {
+      e.preventDefault();
+      const target = document.getElementById(id);
+      if (!target) return;
 
-      const children = document.createElement("div");
-      children.className = "toc-group-children";
-
-      toggle.addEventListener("click", function () {
-        const isOpen = group.classList.contains("open");
-        group.classList.toggle("open", !isOpen);
-        toggle.setAttribute("aria-expanded", String(!isOpen));
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
       });
 
-      group.appendChild(toggle);
-      group.appendChild(children);
-      tocRoot.appendChild(group);
+      const url = currentDocId
+        ? `?doc=${encodeURIComponent(currentDocId)}#${id}`
+        : `#${id}`;
 
-      currentGroup = group;
-      currentChildren = children;
-    } else {
-      const link = document.createElement("a");
-      link.href = `#${heading.id}`;
-      link.className = `toc-link toc-level-${level}`;
-      link.textContent = text;
+      history.replaceState(null, "", url);
+    };
+  }
 
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
+  function renderNodes(nodeList, parentEl) {
+    nodeList.forEach((node) => {
+      const item = document.createElement("div");
+      item.className = `toc-item toc-level-${node.level}`;
 
-        const target = document.getElementById(heading.id);
-        if (!target) return;
+      const hasChildren = node.children && node.children.length > 0;
 
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
+      if (hasChildren && (node.level === 2 || node.level === 3)) {
+        item.classList.add("toc-collapsible", "open");
+
+        const row = document.createElement("div");
+        row.className = "toc-row";
+
+        const link = document.createElement("a");
+        link.href = `#${node.id}`;
+        link.className = "toc-link toc-node-link";
+        link.textContent = node.text;
+        link.addEventListener("click", createScrollHandler(node.id));
+
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "toc-toggle";
+        toggle.setAttribute("aria-expanded", "true");
+        toggle.textContent = "▾";
+
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const isOpen = item.classList.contains("open");
+          item.classList.toggle("open", !isOpen);
+          toggle.setAttribute("aria-expanded", String(!isOpen));
         });
 
-        const currentDocId = new URLSearchParams(window.location.search).get("doc");
-        const url = currentDocId
-          ? `?doc=${encodeURIComponent(currentDocId)}#${heading.id}`
-          : `#${heading.id}`;
+        row.appendChild(link);
+        row.appendChild(toggle);
 
-        history.replaceState(null, "", url);
-      });
+        const children = document.createElement("div");
+        children.className = "toc-children";
 
-      if (currentChildren) {
-        currentChildren.appendChild(link);
+        renderNodes(node.children, children);
+
+        item.appendChild(row);
+        item.appendChild(children);
       } else {
-        // 如果文档一开始没有 h1，就直接放根节点，避免丢失
-        tocRoot.appendChild(link);
+        const link = document.createElement("a");
+        link.href = `#${node.id}`;
+        link.className = "toc-link toc-node-link";
+        link.textContent = node.text;
+        link.addEventListener("click", createScrollHandler(node.id));
+
+        item.appendChild(link);
+
+        if (hasChildren) {
+          const children = document.createElement("div");
+          children.className = "toc-children";
+
+          renderNodes(node.children, children);
+          item.appendChild(children);
+        }
       }
-    }
-  });
+
+      parentEl.appendChild(item);
+    });
+  }
+
+  renderNodes(tree, tocRoot);
 }
 
 

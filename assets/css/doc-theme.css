@@ -644,3 +644,100 @@
 .toc-group:not(.open) .toc-group-children {
   max-height: 0;
 }
+.toc-item {
+  margin: 0.08rem 0;
+}
+
+.toc-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.toc-link {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+  padding: 0.18rem 0.4rem;
+  border-radius: 6px;
+}
+
+.toc-node-link:hover {
+  color: #111827;
+  background: rgba(74, 202, 168, 0.08);
+  border-left-color: #4acaa8;
+}
+
+.toc-toggle {
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 0.78rem;
+  line-height: 1;
+  padding: 0.15rem 0.25rem;
+  border-radius: 4px;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.toc-toggle:hover {
+  color: #374151;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.toc-collapsible.open > .toc-row .toc-toggle {
+  transform: rotate(0deg);
+}
+
+.toc-collapsible:not(.open) > .toc-row .toc-toggle {
+  transform: rotate(-90deg);
+}
+
+.toc-children {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.25s ease;
+}
+
+.toc-collapsible:not(.open) > .toc-children {
+  max-height: 0;
+}
+
+/* 层级样式 */
+.toc-level-1 > .toc-link,
+.toc-level-1 > .toc-row > .toc-link {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+  padding-left: 0.1rem;
+  margin-top: 0.45rem;
+}
+
+.toc-level-2 > .toc-link,
+.toc-level-2 > .toc-row > .toc-link {
+  font-size: 0.91rem;
+  font-weight: 650;
+  color: #374151;
+  padding-left: 0.75rem;
+}
+
+.toc-level-3 > .toc-link,
+.toc-level-3 > .toc-row > .toc-link {
+  font-size: 0.84rem;
+  font-weight: 550;
+  color: #6b7280;
+  padding-left: 1.45rem;
+}
+
+.toc-level-4 > .toc-link,
+.toc-level-4 > .toc-row > .toc-link {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #9ca3af;
+  padding-left: 2.15rem;
+}
