@@ -4213,13 +4213,4 @@ body.subpage-fancy::after {
   mask-image: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.15));
   pointer-events: none;
 }
-body.subpage-fancy .main,
-body.subpage-fancy .main.style1,
-body.subpage-fancy .main.style2,
-body.subpage-fancy .main.style3 {
-  background: transparent !important;
-}
-body.subpage-fancy .subpage-header,
-body.subpage-fancy #footer {
-  background: transparent !important;
-}
+
