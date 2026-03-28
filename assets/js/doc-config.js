@@ -50,12 +50,12 @@ const DOCUMENTS_NAV = [
     title: "视觉代码阅读",
     children: [
       {
-        title: "Vision1",
+        title: "Vision_Z",
         file: "docs/documents/Vision_module.md",
         docId: "vision-module-overview"
       },
       {
-        title: "Vision2",
+        title: "Vision_W",
         file: "docs/documents/dvision 代码解读.md",
         docId: "vision-module-overview2"
       },
