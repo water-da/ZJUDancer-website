@@ -13,6 +13,21 @@ document.addEventListener("DOMContentLoaded", function () {
     return file.split(".").pop().toLowerCase();
   }
 
+  function getFileName(file) {
+    if (!file) return "";
+    return file.split("/").pop();
+  }
+
+  function createDocToolbar(file, label = "Download File") {
+    const fileName = getFileName(file);
+    return `
+      <div class="doc-toolbar">
+        <a href="${file}" target="_blank" class="button small">Open File</a>
+        <a href="${file}" download="${fileName}" class="button small">${label}</a>
+      </div>
+    `;
+  }
+
   function slugify(text) {
     return text
       .toLowerCase()
@@ -41,132 +56,131 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-function buildTOC(root) {
-  if (!tocRoot || !tocContainer) return;
+  function buildTOC(root) {
+    if (!tocRoot || !tocContainer) return;
 
-  tocRoot.innerHTML = "";
+    tocRoot.innerHTML = "";
 
-  const headings = Array.from(root.querySelectorAll("h1, h2, h3, h4"));
+    const headings = Array.from(root.querySelectorAll("h1, h2, h3, h4"));
 
-  if (!headings.length) {
-    tocContainer.style.display = "none";
-    return;
-  }
-
-  tocContainer.style.display = "";
-
-  const nodes = headings.map((heading) => ({
-    id: heading.id,
-    text: heading.textContent.trim(),
-    level: Number(heading.tagName.charAt(1)),
-    children: []
-  }));
-
-  const tree = [];
-  const stack = [];
-
-  nodes.forEach((node) => {
-    while (stack.length && stack[stack.length - 1].level >= node.level) {
-      stack.pop();
+    if (!headings.length) {
+      tocContainer.style.display = "none";
+      return;
     }
 
-    if (stack.length) {
-      stack[stack.length - 1].children.push(node);
-    } else {
-      tree.push(node);
-    }
+    tocContainer.style.display = "";
 
-    stack.push(node);
-  });
+    const nodes = headings.map((heading) => ({
+      id: heading.id,
+      text: heading.textContent.trim(),
+      level: Number(heading.tagName.charAt(1)),
+      children: []
+    }));
 
-  const currentDocId = new URLSearchParams(window.location.search).get("doc");
+    const tree = [];
+    const stack = [];
 
-  function createScrollHandler(id) {
-    return function (e) {
-      e.preventDefault();
-      const target = document.getElementById(id);
-      if (!target) return;
+    nodes.forEach((node) => {
+      while (stack.length && stack[stack.length - 1].level >= node.level) {
+        stack.pop();
+      }
 
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      if (stack.length) {
+        stack[stack.length - 1].children.push(node);
+      } else {
+        tree.push(node);
+      }
 
-      const url = currentDocId
-        ? `?doc=${encodeURIComponent(currentDocId)}#${id}`
-        : `#${id}`;
+      stack.push(node);
+    });
 
-      history.replaceState(null, "", url);
-    };
-  }
+    const currentDocId = new URLSearchParams(window.location.search).get("doc");
 
-  function renderNodes(nodeList, parentEl) {
-    nodeList.forEach((node) => {
-      const item = document.createElement("div");
-      item.className = `toc-item toc-level-${node.level}`;
+    function createScrollHandler(id) {
+      return function (e) {
+        e.preventDefault();
+        const target = document.getElementById(id);
+        if (!target) return;
 
-      const hasChildren = node.children && node.children.length > 0;
-
-      if (hasChildren && (node.level === 2 || node.level === 3)) {
-        item.classList.add("toc-collapsible", "open");
-
-        const row = document.createElement("div");
-        row.className = "toc-row";
-
-        const link = document.createElement("a");
-        link.href = `#${node.id}`;
-        link.className = "toc-link toc-node-link";
-        link.textContent = node.text;
-        link.addEventListener("click", createScrollHandler(node.id));
-
-        const toggle = document.createElement("button");
-        toggle.type = "button";
-        toggle.className = "toc-toggle";
-        toggle.setAttribute("aria-expanded", "true");
-        toggle.textContent = "▾";
-
-        toggle.addEventListener("click", function (e) {
-          e.stopPropagation();
-          const isOpen = item.classList.contains("open");
-          item.classList.toggle("open", !isOpen);
-          toggle.setAttribute("aria-expanded", String(!isOpen));
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
         });
 
-        row.appendChild(link);
-        row.appendChild(toggle);
+        const url = currentDocId
+          ? `?doc=${encodeURIComponent(currentDocId)}#${id}`
+          : `#${id}`;
 
-        const children = document.createElement("div");
-        children.className = "toc-children";
+        history.replaceState(null, "", url);
+      };
+    }
 
-        renderNodes(node.children, children);
+    function renderNodes(nodeList, parentEl) {
+      nodeList.forEach((node) => {
+        const item = document.createElement("div");
+        item.className = `toc-item toc-level-${node.level}`;
 
-        item.appendChild(row);
-        item.appendChild(children);
-      } else {
-        const link = document.createElement("a");
-        link.href = `#${node.id}`;
-        link.className = "toc-link toc-node-link";
-        link.textContent = node.text;
-        link.addEventListener("click", createScrollHandler(node.id));
+        const hasChildren = node.children && node.children.length > 0;
 
-        item.appendChild(link);
+        if (hasChildren && (node.level === 2 || node.level === 3)) {
+          item.classList.add("toc-collapsible", "open");
 
-        if (hasChildren) {
+          const row = document.createElement("div");
+          row.className = "toc-row";
+
+          const link = document.createElement("a");
+          link.href = `#${node.id}`;
+          link.className = "toc-link toc-node-link";
+          link.textContent = node.text;
+          link.addEventListener("click", createScrollHandler(node.id));
+
+          const toggle = document.createElement("button");
+          toggle.type = "button";
+          toggle.className = "toc-toggle";
+          toggle.setAttribute("aria-expanded", "true");
+          toggle.textContent = "▾";
+
+          toggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const isOpen = item.classList.contains("open");
+            item.classList.toggle("open", !isOpen);
+            toggle.setAttribute("aria-expanded", String(!isOpen));
+          });
+
+          row.appendChild(link);
+          row.appendChild(toggle);
+
           const children = document.createElement("div");
           children.className = "toc-children";
 
           renderNodes(node.children, children);
+
+          item.appendChild(row);
           item.appendChild(children);
+        } else {
+          const link = document.createElement("a");
+          link.href = `#${node.id}`;
+          link.className = "toc-link toc-node-link";
+          link.textContent = node.text;
+          link.addEventListener("click", createScrollHandler(node.id));
+
+          item.appendChild(link);
+
+          if (hasChildren) {
+            const children = document.createElement("div");
+            children.className = "toc-children";
+
+            renderNodes(node.children, children);
+            item.appendChild(children);
+          }
         }
-      }
 
-      parentEl.appendChild(item);
-    });
+        parentEl.appendChild(item);
+      });
+    }
+
+    renderNodes(tree, tocRoot);
   }
-
-  renderNodes(tree, tocRoot);
-}
-
 
   function hideTOC() {
     if (!tocContainer) return;
@@ -200,9 +214,7 @@ function buildTOC(root) {
           </div>
         `;
 
-
         pre.replaceWith(wrapper);
-
       } catch (error) {
         console.error("Mermaid render error:", error);
 
@@ -219,22 +231,36 @@ function buildTOC(root) {
 
   async function renderMarkdown(file) {
     contentRoot.className = "doc-content markdown-body";
-    contentRoot.innerHTML = "<p>Loading markdown...</p>";
+    contentRoot.innerHTML = `
+      ${createDocToolbar(file, "Download Markdown")}
+      <p>Loading markdown...</p>
+    `;
 
     try {
       const response = await fetch(file);
       if (!response.ok) throw new Error("Failed to load markdown");
 
       const text = await response.text();
-      contentRoot.innerHTML = marked.parse(text);
 
-      assignHeadingIds(contentRoot);
-      await renderMermaidInContent(contentRoot);
-      buildTOC(contentRoot);
-      bindZoomableMedia(contentRoot, viewerInstance);
+      contentRoot.innerHTML = `
+        ${createDocToolbar(file, "Download Markdown")}
+        <div class="doc-markdown-body">
+          ${marked.parse(text)}
+        </div>
+      `;
+
+      const markdownBody = contentRoot.querySelector(".doc-markdown-body");
+
+      assignHeadingIds(markdownBody);
+      await renderMermaidInContent(markdownBody);
+      buildTOC(markdownBody);
+      bindZoomableMedia(markdownBody, viewerInstance);
 
     } catch (error) {
-      contentRoot.innerHTML = `<p>Failed to load document: ${error.message}</p>`;
+      contentRoot.innerHTML = `
+        ${createDocToolbar(file, "Download Markdown")}
+        <p>Failed to load document: ${error.message}</p>
+      `;
       hideTOC();
     }
   }
@@ -246,7 +272,7 @@ function buildTOC(root) {
     contentRoot.innerHTML = `
       <div class="doc-toolbar">
         <a href="${file}" target="_blank" class="button small">Open PDF in New Tab</a>
-        <a href="${file}" download class="button small">Download PDF</a>
+        <a href="${file}" download="${getFileName(file)}" class="button small">Download PDF</a>
       </div>
       <iframe class="pdf-frame" src="${file}"></iframe>
     `;
@@ -268,7 +294,7 @@ function buildTOC(root) {
       contentRoot.innerHTML = `
         <div class="doc-toolbar">
           <a href="${item.file}" target="_blank" class="button small">Open File</a>
-          <a href="${item.file}" download class="button small">Download File</a>
+          <a href="${item.file}" download="${getFileName(item.file)}" class="button small">Download File</a>
         </div>
         <p>This file type is not previewable in the current page.</p>
       `;
@@ -553,7 +579,6 @@ function bindZoomableMedia(root, viewerInstance) {
     });
   });
 }
-
 
 function setupMermaidZoom(wrapper) {
   const stage = wrapper.querySelector(".mermaid-stage");

@@ -89,12 +89,12 @@ const DOCUMENTS_NAV = [
 
 const TUTORIALS_NAV = [
   {
-    title: "Getting Started",
+    title: "Overview",
     children: [
       {
-        title: "Getting Started",
+        title: "Overview",
         file: "docs/tutorials/index.md",
-        docId: "getting-started"
+        docId: "overview"
       }
     ]
   },
