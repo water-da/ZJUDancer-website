@@ -525,3 +525,68 @@
     min-height: 600px;
   }
 }
+/* 文档侧边栏：恢复正常字号和大小写 */
+#doc-nav .doc-nav-toggle,
+#doc-nav .doc-link {
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  line-height: 1.6 !important;
+  font-family: inherit !important;
+}
+
+/* 组标题按钮 */
+#doc-nav .doc-nav-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent !important;
+  border: none !important;
+  padding: 0.55rem 0.75rem !important;
+  color: #2f3b52 !important;
+  cursor: pointer;
+  text-align: left !important;
+  box-shadow: none !important;
+}
+
+/* 文档链接按钮 */
+#doc-nav .doc-link {
+  width: 100%;
+  display: block;
+  background: transparent !important;
+  border: none !important;
+  padding: 0.45rem 0.75rem !important;
+  color: #4a5568 !important;
+  cursor: pointer;
+  text-align: left !important;
+  border-radius: 10px;
+  box-shadow: none !important;
+}
+
+/* hover */
+#doc-nav .doc-link:hover,
+#doc-nav .doc-nav-toggle:hover {
+  background: rgba(80, 120, 200, 0.08) !important;
+  color: #1f3f75 !important;
+}
+
+/* 当前激活项 */
+#doc-nav .doc-link.active {
+  background: #e8f0ff !important;
+  color: #1f4ea3 !important;
+  font-weight: 600 !important;
+}
+
+/* 子目录缩进更自然 */
+#doc-nav .doc-subnav {
+  margin-left: 0.75rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(120, 130, 150, 0.15);
+}
+
+/* 每个节点之间的间距 */
+#doc-nav .doc-nav-item {
+  margin-bottom: 0.2rem;
+}
