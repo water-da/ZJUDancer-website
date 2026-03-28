@@ -1,26 +1,53 @@
-.wechat-card {
-  display: inline-flex;
+.image-showcase {
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.88);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(6px);
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+  box-sizing: border-box;
 }
 
-.wechat-qr {
+.showcase-image {
   display: block;
-  width: 180px;
+  width: min(420px, 88vw);
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 20px;
+  background: #fff;
+  padding: 12px;
+  box-shadow: 0 18px 48px rgba(31, 63, 117, 0.16);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.wechat-text {
-  margin-top: 0.75rem;
-  font-size: 0.95rem;
-  color: #2f3b52;
-  font-weight: 500;
+.showcase-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 56px rgba(31, 63, 117, 0.22);
+}
+
+.image-actions {
+  margin-top: 1.25rem;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2f80ff, #4da3ff);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.96rem;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(47, 128, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(47, 128, 255, 0.32);
+}
+
+.download-btn:active {
+  transform: translateY(0);
 }
